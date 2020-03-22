@@ -1,0 +1,19 @@
+.block.horizontal-padding-25
+  -# コントローラがsessionsではないならメールアドレスで○○○は表示しない
+  - if controller.controller_name != "sessions"
+    = link_to new_user_registration_path do
+      .button.mail
+        = icon "far", "envelope", class: "button__mail-icon"
+        %span.button__text
+          -# @auth_textには「で登録する」や「でログイン」が入る
+          メールアドレス#{@auth_text}
+  = link_to root_path do
+    .button.facebook
+      = icon "fab", "facebook-square", class: "button__facebook-icon"
+      %span.button__text
+        facebook#{@auth_text}
+  = link_to root_path, method: :post do
+    .button.google
+      = image_tag "google_icon.png", class: "button__google-icon"
+      %span.button__text
+        Google#{@auth_text}

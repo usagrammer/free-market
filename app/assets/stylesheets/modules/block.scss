@@ -1,0 +1,28 @@
+.block {
+  width: 100%;
+  background-color: white;
+  margin-bottom: 1px;
+  padding: 1rem;
+
+  &__menu {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 3rem 0;
+  }
+
+  &__menu-left {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &__menu-right {
+    text-align: right;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &__text {
+    text-align: center;
+  }
+}

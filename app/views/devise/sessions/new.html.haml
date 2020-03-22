@@ -1,0 +1,23 @@
+.block.horizontal-padding-25
+  アカウントをお持ちでない方はこちら
+  = link_to "" do
+    .button.new_registration
+      %span.button__text
+        新規会員登録
+-# ↓メールアドレス、Facebook、Googleの3つのボタン
+= render 'layouts/select_auth'
+.block.horizontal-padding-25
+  .forms
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .input-field
+        = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス"
+      .input-field
+        = f.password_field :password, autocomplete: "current-password", placeholder: "パスワード"
+      - if devise_mapping.rememberable?
+        .form-wrapper
+          = f.check_box :remember_me
+          = f.label :remember_me, "ログインを記憶する"
+      = f.submit "次へ進む", class:"button back-red font-white"
+      %br
+      = link_to "" do
+        パスワードをお忘れの方

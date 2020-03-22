@@ -1,0 +1,21 @@
+.block.horizontal-padding-25
+  .block__menu
+    電話番号の確認
+.block.horizontal-padding-25
+  .input-field
+    .input-field-main
+      %label
+        携帯電話の番号
+      %br
+      %input{type: "text"}
+  .information
+    %p.information__text
+      本人確認のため、携帯電話のSMS（ショートメッセージサービス）を利用して認証を行います。
+  %br
+  = link_to new_regist_address_path do
+    %span.button.back-red.font-white
+      SMSを送信する
+  .information
+    .information__text
+      ※電話番号は本人確認や不正利用防止の為に使用します。他のユーザーに公開されることはありません。
+

@@ -1,0 +1,29 @@
+.mypage-block
+  .mypage-block-header-user
+    =link_to " " do
+      =image_tag "user_noimage.png", class:"mypage-block-header-user__image"
+      .mypage-block-header-user__name
+        = current_user.nickname
+      .mypage-block-header-user__rate
+        評価：５ 出品数 3
+  .mypage-block-tabs
+    .mypage-block-tabs__tab.active-tab
+      取引中
+    .mypage-block-tabs__tab
+      過去の取引
+  .mypage-block-data-list
+    .mypage-block-data-list__data-none
+      .text
+        出品中の商品がありません。
+.mypage-block
+  .mypage-block-header
+    出品した商品
+  .mypage-block-tabs
+    .mypage-block-tabs__tab.active-tab
+      取引中
+    .mypage-block-tabs__tab
+      過去の取引
+  .mypage-block-data-list
+    .mypage-block-data-list__data-none
+      .text
+        出品中の商品がありません。

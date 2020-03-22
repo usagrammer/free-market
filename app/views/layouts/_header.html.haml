@@ -1,0 +1,61 @@
+%header.header.horizontal-padding-15
+  .header-top
+    = link_to root_path do
+      = image_tag 'logo.svg', class: "header-top__logo"
+    = form_with url: "", method: :get, local: true  do |f|
+      = f.search_field :name, name: "name_search", placeholder: "何かお探しですか?", class: "header-top__search"
+      = f.hidden_field :name, name: "q[:hoge]"
+      = button_tag type: 'submit', class:"header-top__loupe" do
+        = icon "fas", "search"
+  .header-bottom
+    .header-bottom-left
+      .header-bottom-left__button
+        = link_to "" do
+          = icon "fas", "list", class:"header-bottom-left__button--red"
+          カテゴリーから探す
+        -# .category-lists
+        -#   -# ↓親カテゴリの表示ここから↓
+        -#   .category-lists__list.parent
+        -#     - Category.roots.each do |parent_category|
+        -#       = link_to root_path, class:"category-lists__list--category" do
+        -#         = parent_category.name
+        -#       -# ↑親カテゴリの表示ここまで↑
+        -#       -# ↓子カテゴリの表示ここから↓
+        -#       .category-lists__list.child
+        -#         - parent_category.get_children.each do |child_category|
+        -#           = link_to root_path(child_category), class:"category-lists__list--category" do
+        -#             = child_category.name
+        -#           -# ↑子カテゴリの表示ここまで↑
+        -#           -# ↓孫カテゴリの表示ここから↓
+        -#           .category-lists__list.grand-child
+        -#             - child_category.get_children.each do |grandchild_category|
+        -#               = link_to root_path, class:"category-lists__list--category" do
+        -#                 = grandchild_category.name
+        -#                 -# ↑孫カテゴリの表示ここまで↑
+      .header-bottom-left__button
+        = link_to "" do
+          = icon "fas", "tags", class:"header-bottom-left__button--red"
+          ブランドから探す
+    .header-bottom-right
+      - if false
+        .header-bottom-right__button
+          = link_to "" do
+            = icon "fas", "heart", class:"header-bottom-right__button--gray"
+            いいね!一覧
+        .header-bottom-right__button
+          = link_to "" do
+            = icon "fas", "bell", class:"header-bottom-right__button--gray"
+            お知らせ
+        .header-bottom-right__button
+          = link_to "" do
+            = icon "fas", "check", class:"header-bottom-right__button--gray"
+            やることリスト
+        .header-bottom-right__button
+          = link_to root_path do
+            = image_tag 'user_noimage.png', class:"header-bottom-right__mypage"
+            マイページ
+      - else
+        = link_to root_path,  data: {turbolinks: :false} do
+          新規会員登録
+        = link_to root_path, data: {turbolinks: :false}  do
+          ログイン

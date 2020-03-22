@@ -1,0 +1,17 @@
+.flash-red {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.flash {
+  color: white;
+  text-align: center;
+
+  &__alert {
+    background-color: red;
+  }
+
+  &__notice {
+    background-color: blue;
+  }
+}

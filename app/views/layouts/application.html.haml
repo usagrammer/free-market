@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title FreemarketSecond
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+%body
+  = render 'layouts/flash'
+  = render 'layouts/header'
+  = yield
+  = link_to root_path, data:{turbolinks: false} do
+    .sell-button
+      .sell-button__text
+        出品
+      = icon "fas", "camera", class:"sell-button__icon"
+  = render 'layouts/footer'

@@ -1,0 +1,30 @@
+html {
+  box-sizing: border-box;
+  font-size: 0.71428571vw; //10px / 1400px * 100
+}
+
+@media screen and (min-width: 1401px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+body {
+  background-color: rgb(245, 245, 245);
+  font-size: 1.6rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  white-space: nowrap;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0099e8;
+}

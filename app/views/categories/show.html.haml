@@ -1,0 +1,6 @@
+.items-wrapper.horizontal-padding-20
+  .items-wrapper__title
+    = "#{@category.name}の商品一覧"
+  .items-wrapper__items
+    = render @items
+  = paginate(@items)

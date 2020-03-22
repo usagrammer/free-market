@@ -1,0 +1,60 @@
+.block.horizontal-padding-25
+  .block__menu
+    購入内容の確認
+.block.horizontal-padding-25
+  .block__main
+    .item-purchase-confirmation
+      .item-purchase-confirmation__image-and-name
+        = image_tag @item.item_images[0].image.url
+        .item-purchase-confirmation__image-and-name--name
+          = @item.name
+      .item-purchase-confirmation__price
+        .item-purchase-confirmation__price--yen
+          ¥
+          = @item.price
+        .item-purchase-confirmation__price--fee
+          \(税込み)
+    .button.back-gray
+      ポイントはありません
+    #amount
+      #amount__left
+        支払金額
+      #amount__right
+        ¥
+        = @item.price
+    - unless @card
+      .font-red
+        配送先と支払い方法の入力を完了してください。
+    = link_to "", method: :post do
+      .button{class: "#{'back-red' if @card}" }
+        購入する
+.block.horizontal-padding-25
+  .block__menu-left
+    配送先
+  .block__main
+    〒571-0032
+    %br
+    大阪府 門真市寿町 18-24
+    %br
+    鵜野 佑紀
+  .block__menu-right
+    = link_to "" do
+      変更する >
+.block.horizontal-padding-25
+  .block__menu-left
+    支払い方法
+  .block__main
+    #card-data
+      - if @card
+        = @card[:last4]
+        %br
+        = @card[:exp_month]
+        \/
+        = @card[:exp_year]
+        %br
+        = @card[:brand]
+      - else
+        \/
+  .block__menu-right
+    = link_to "", data: {turbolinks: false} do
+      変更する >

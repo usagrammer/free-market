@@ -1,0 +1,60 @@
+.button {
+  width: 100%;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &__mail-icon {
+    font-size: 2rem;
+  }
+
+  &__facebook-icon {
+    font-size: 2.5rem;
+  }
+
+  &__google-icon {
+    height: 2rem;
+  }
+
+  &__text {
+    margin: 0 auto;
+  }
+
+}
+
+.delete-button {
+  border: solid 1px red;
+  background-color: white;
+  color: red;
+}
+
+.mail {
+  color: white;
+  background-color: red;
+}
+
+.facebook {
+  color: white;
+  background-color: #385185;
+}
+
+.google {
+  color: black;
+  background-color: white;
+  border: solid 1px black;
+}
+
+.new_registration {
+  color: white;
+  background-color: #0099e8;
+}
+
+.regist-card {
+  color: white;
+  background-color: red;
+}

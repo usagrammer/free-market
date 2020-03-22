@@ -1,0 +1,14 @@
+= link_to "", data:{turbolinks: false}  do
+  .item
+    = render partial: 'layouts/sold_out', locals: {item: item}
+    .item-top
+      = image_tag item.item_images[0].image.url, class: "item-top__image"
+      .item-top__price
+        ¥
+        = item.price
+    .item-bottom
+      .item-bottom__name
+        = item.name
+      .item-bottom-price-good
+        .item-bottom-price-good__price
+        = icon "fas", "heart", class:"item-bottom-price-good__good"

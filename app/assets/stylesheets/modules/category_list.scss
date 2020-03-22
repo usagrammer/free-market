@@ -1,0 +1,43 @@
+.category-lists {
+  // 親カテゴリたちを覆っているもの
+  position: absolute;
+  z-index: 10000;
+
+  &__list {
+    // 親カテゴリ・子カテゴリ・孫カテゴリの大枠
+    width: 28rem;
+    height: 60rem;
+    background-color: white;
+    border: solid 1px black;
+    display: none;
+    position: absolute;
+
+    &--category {
+      // カテゴリ一つ一つ
+      display: block;
+    }
+  }
+
+  .child,
+  .grand-child {
+    // 子カテゴリ・孫カテゴリの位置調整
+    top: -1px; // borderの太さ分だけずらす。
+    left: 100%;
+  }
+
+}
+
+.header-bottom-left__button:hover .category-lists__list.parent {
+  // 「カテゴリから探す」に触れている時、親カテゴリを表示する
+  display: block;
+}
+
+.category-lists__list--category:hover+.category-lists__list {
+  // .category-lists__listに触れている時、その兄弟要素の.category-lists__listを表示する
+  display: block;
+}
+
+.category-lists__list:hover {
+  // カテゴリの大枠にカーソルが合わさっている時、表示し続ける
+  display: block;
+}

@@ -1,0 +1,38 @@
+.campaigns
+  .campaigns-app
+    .index-campaign.horizontal-padding-15
+      = image_tag 'campaign_bg.jpg', class: "campaign_bg"
+      .index-campaign__left.index-campaign__banner-inside-parts
+        %p.index-campaign__left-top
+          スマホでカンタン
+          %br
+          フリマアプリ
+        %p.index-campaign__left-bottom
+          メルカリはスマホカメラからすぐに出品できる
+          %br
+          購入時も安心な独自システムのアプリです
+        = image_tag 'app-store.svg', class: "index-campaign__banner-inside-parts"
+        = image_tag 'google-play.svg', class: "index-campaign__banner-inside-parts"
+      = image_tag 'campaign_bg_phone.png', class: "index-campaign__phone index-campaign__banner-inside-parts"
+  .campaigns-camp
+    .index-campaign.horizontal-padding-15
+      = image_tag 'banner-camp.jpg', class: "campaign_bg"
+.pickups-header
+  人気のカテゴリー
+  .pickups-header__category-names
+    - @category_ranking&.each do |category|
+      = link_to "" do
+        .pickups-header__category-names--category-name
+          = category.name
+.pickups.horizontal-padding-15
+  %br
+  - @sorted_items&.each do |items|
+    .pickup
+      %span.pickup__name
+        = items[0].category.root.name
+        新着アイテム
+      = link_to "" do
+        %span.pickup__display-all
+          もっと見る >
+      .pickup__items{class: "#{'auto-slick' if items.length >= 4}"}
+        = render items

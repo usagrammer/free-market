@@ -1,0 +1,94 @@
+.footer {
+  width: 100%;
+
+  .footer-top {
+    height: 26rem;
+    background: image-url("footer_bg.jpg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    &-right {
+      height: 100%;
+      margin-left: 2rem;
+    }
+
+    &-left {
+      color: white;
+
+      &__top {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+
+      &__bottom {
+        font-size: 4rem;
+        margin: 1rem 0;
+      }
+
+      &__images {
+        display: flex;
+        align-items: center;
+
+        &--mercari {
+          height: 5rem;
+          margin-right: 1rem;
+        }
+
+        &--phone {
+          height: 3rem;
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+
+  .footer-middle {
+    background-color: #212121;
+    padding: 1rem 0;
+
+    display: flex;
+
+    &-wrapper {
+      margin-right: 1rem;
+
+      &__header {
+        height: 1rem;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 2rem;
+      }
+
+      &__bottom {
+
+        a {
+          color: gray;
+          font-size: 0.75rem;
+          margin: 1rem 0;
+          display: block;
+        }
+
+        p {
+          color: white;
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    background-color: #212121;
+    color: white;
+
+    &__logo-copyright {
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+
+      &--logo {
+        float: left;
+      }
+    }
+  }
+}

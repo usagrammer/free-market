@@ -1,0 +1,78 @@
+.search-view.horizontal-padding-15
+  = search_form_for(@q, url: "")  do |f|
+    = f.select(:sorts, @order, {include_blank: "並び替え", selected: params[:q][:sorts]}, class: "search-form__input")
+    .search-form
+      .search-form__title
+        詳細検索
+      /// 商品名
+      = icon "fas", "plus"
+      = f.label :name, "キーワードを追加する", {for: "q_name", class: "search-form__label"}
+      = f.search_field :name, value: params[:name_search], name: "name_search", placeholder: "例）値下げ", class: "search-form__input"
+      /// カテゴリー
+      = icon "fas", "list"
+      = f.label :category_id_in, 'カテゴリーを選択する',{class: "search-form__label", for: "item_parent_category_id"}
+      .search-form__categories
+        = f.collection_select(:category_id_in, Category.roots, :id , :name, {selected: @parent_category&.id, include_blank: "すべて"}, {name: "q[category_id_in][]", class: "select-category", id: "item_parent_category_id"})
+        /// 親カテゴリーが選択されていたら子カテゴリーを追加する
+        - if @parent_category
+          = f.collection_select(:category_id_in, @parent_category.children, :id , :name, {selected: @child_category&.id, include_blank: "すべて"}, {name: "q[category_id_in][]", class: "select-category search-form-added"})
+        /// 子カテゴリーが選択されていたら孫カテゴリーを追加する
+        - if @child_category
+          .select-category.search-form-added
+            .search-checkboxes.search-form-added
+              = f.collection_check_boxes(:category_id_in, @child_category.children, :id , :name, {checked: @grandchild_category_ids}, {class: "select-category search-form-added"})
+      /// ブランド
+      = icon "fas", "tag"
+      = f.label :name, 'ブランド', {for: "brand-search__form", class: "search-form__label"}
+      #brand-search
+        = f.search_field :name, name: "search_brand", value: params[:search_brand], placeholder: "例）シャネル",  class: "search-form__input", id: "brand-search__form"
+        #brand-search__result
+      /// サイズ
+      = icon "fas", "tshirt"
+      = f.label :category_size_group_name_in, 'サイズ', {class: "search-form__label"}
+      = f.select(:category_size_group_name_in, Size.pluck(:group_name).uniq, {selected: @size_group_name, include_blank: "---"}, {name: "size_group", class: "search-form__input"})
+      /// サイズが選択されていたらチェックボックスを追加する
+      -if params[:q][:item_size_size_id_in]
+        .search-checkboxes.search-form-added
+          = f.collection_check_boxes :item_size_size_id_in, @size_list, :id, :name, {checked: params[:q][:item_size_size_id_in]}
+      /// 価格
+      = icon "fas", "yen-sign"
+      = f.label :price, '価格', {class: "search-form__label"}
+      = f.select :price, @price_list, include_blank: '指定なし'
+      .search-form__price-range
+        = f.text_field :price_gteq, placeholder: "¥ Min"
+        〜
+        = f.text_field :price_lteq, placeholder: "¥ Max"
+      /// 状態
+      = icon "fas", "star"
+      = f.label :condition_in, '状態', {class: "search-form__label"}
+      .search-checkboxes
+        = f.collection_check_boxes :condition_in, {"すべて": -1}.merge(Item.conditions), :second, :first
+      /// 送料の負担者
+      = icon "fas", "truck"
+      = f.label :delivery_fee_payer_in, '送料負担', {class: "search-form__label"}
+      .search-checkboxes
+        -# = f.select :delivery_fee_payer_in, Item.delivery_fee_payers.keys, {}
+        = f.collection_check_boxes :delivery_fee_payer_in, {"すべて": -1}.merge(Item.delivery_fee_payers), :second, :first
+      /// 販売状況
+      = icon "fas", "shopping-cart"
+      = f.label :deal_cont, '販売状況', {class: "search-form__label"}
+      .search-checkboxes
+        = f.collection_check_boxes :deal_in, {"すべて": -1}.merge(Item.deals), :second, :first
+      /// 送信
+      .search-form__buttons
+        .search-form__buttons--clear.button.back-gray
+          クリア
+        = f.submit "完了", class:"search-form__buttons--submit button back-red"
+  .search-results
+    - if @items.length > 0
+      = render partial: "items/item", collection: @items, as: :item
+      #pagenation
+        = paginate(@items)
+
+    - else
+      .result-none
+        .result-none__title
+          検索結果
+        .result-none__text
+          該当する商品が見つかりません。検索条件を変えて、再度お試しください。

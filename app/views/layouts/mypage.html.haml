@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title FreemarketSecond
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %script{src: "https://js.pay.jp/", type: "text/javascript"}
+%body
+  = render 'layouts/flash'
+  = render 'layouts/header'
+  .mypage.horizontal-padding-15
+    = render 'users/side_bar'
+    .mypage-main
+      = yield
+  = link_to root_path, data:{turbolinks: false} do
+    .sell-button
+      .sell-button__text
+        出品
+      = icon "fas", "camera", class:"sell-button__icon"
+  = render 'layouts/footer'
