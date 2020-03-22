@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     member do
       get "purchase_confirmation"
     end
+    collection do
+      get 'search'
+    end
   end
   resources :categories, only: [:index, :show]
   resource :cards, only: [:new, :create, :show, :update, :destroy]
