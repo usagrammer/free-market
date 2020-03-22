@@ -11,6 +11,7 @@
         %br
         最大5枚までアップロードできます。
         #selected-item-images
+          -# 商品編集の際はプレビューを表示
           - if false
             .item-image{data: {index: 0}}
               = image_tag "", class: "item-image__image"
@@ -24,7 +25,6 @@
               クリックしてファイルをアップロード
     #image-file-fields
       = file_field_tag :hoge, class: "new-item-image", id: "file_field_index_0", accept: "image/*", data: {index: 0}
-      = f.file_field :hoge, id: "change-item-image", name: "", accept: "image/*", data: {index: ""}
     .error-field{data:{column_name: "item_images"}}
   .block.horizontal-padding-5
     .input-field
@@ -154,4 +154,4 @@
       = link_to "" do
         .button.back-gray
           戻る
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.3.1/fuse.min.js"></script>
+%script{ src: "https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.3.1/fuse.min.js" }
