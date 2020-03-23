@@ -51,4 +51,5 @@ production:
   <<: *default
   database: free_market_production
   username: free_market
-  password: <%= ENV['FREE_MARKET_DATABASE_PASSWORD'] %>
+  password: <%= Rails.application.credentials[:database_password] %>
+  socket: /var/lib/mysql/mysql.sock
