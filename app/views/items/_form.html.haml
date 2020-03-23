@@ -55,28 +55,11 @@
         = f.collection_select :hoge, [], :hoge , :hoge, {include_blank: "---"}, required: true, class: "select-category", id: "parent-category"
         .error-field{data:{column_name: "category"}}
 
-        = f.label :hoge, for: "brand-search__form", class: "select-category" do
-          ブランド
-        %span.required-false.select-category
-          任意
-        #brand-search.select-category
-          = f.text_field  :hoge, name: "brand_name", id: "brand-search__form"
-          #brand-search__result
-        .error-field.select-category{data:{column_name: "brand"}}
-
-        = f.label :hoge, for: "size-form", class: "select-category" do
-          サイズ
-        %span.required-true.select-category
-          必須
-        .select-category
-          = f.collection_select :hoge, [], :hoge, :hoge, {include_blank: "---"}, {id: "size-form", required: true}
-          .error-field.select-category{data:{column_name: "item_size.size"}}
-
         = f.label :hoge, "商品の状態"
         %span.required-true
           必須
         %br
-        = f.select :hoge, []
+        = f.select :hoge, [], {include_blank: "---"}
   .block.horizontal-padding-5
     .input-field
       .input-field-title
@@ -95,7 +78,7 @@
           %span.required-true
             必須
           %br
-          = f.select :hoge, []
+          = f.select :hoge, [], {include_blank: "---"}
           %br
           .error-field{data:{column_name: "delivery_method"}}
         = f.label :hoge, "発送元の地域"
@@ -109,7 +92,7 @@
         %span.required-true
           必須
         %br
-        = f.select :hoge, []
+        = f.select :hoge, [], {include_blank: "---"}
         .error-field{data:{column_name: "delivery_days"}}
   .block.horizontal-padding-5
     .input-field
