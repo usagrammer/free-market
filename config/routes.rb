@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # devise_for :users
 
-  resource :users, only: [:show] do
+  resources :users, only: [:show] do
     collection do
       get "card"
       get "selling"
@@ -24,6 +24,6 @@ Rails.application.routes.draw do
     end
   end
   resources :categories, only: [:index, :show]
-  resource :cards, only: [:new, :create, :show, :update, :destroy]
+  resources :cards, only: [:new, :create, :show, :update, :destroy]
 
 end
