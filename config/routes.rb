@@ -2,18 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "items#index"
 
-  # devise_for :users
-
-  resources :users, only: [:show] do
-    collection do
-      get "card"
-      get "selling"
-      get "selling_progress"
-      get "sold"
-      get "bought_progress"
-      get "bought_past"
-    end
-  end
+  resources :users, only: [:show]
 
   resources :items, only: [:index, :new, :show, :edit]  do
     member do
@@ -24,6 +13,6 @@ Rails.application.routes.draw do
     end
   end
   resources :categories, only: [:index, :show]
-  resources :cards, only: [:new, :create, :show, :update, :destroy]
+  resources :cards, only: [:new :show]
 
 end
