@@ -22,20 +22,6 @@
           .select-category.search-form-added
             .search-checkboxes.search-form-added
               = f.collection_check_boxes(:hoge, [], :hoge , :hoge, {}, {class: "select-category search-form-added"})
-      /// ブランド
-      = icon "fas", "tag"
-      = f.label :hoge, 'ブランド', {class: "search-form__label"}
-      #brand-search
-        = f.search_field :hoge,placeholder: "例）シャネル",  class: "search-form__input", id: "brand-search__form"
-        #brand-search__result
-      /// サイズ
-      = icon "fas", "tshirt"
-      = f.label :hoge, 'サイズ', {class: "search-form__label"}
-      = f.select(:hoge, [], {include_blank: "---"}, {class: "search-form__input"})
-      /// サイズが選択されていたらチェックボックスを追加する
-      -if true
-        .search-checkboxes.search-form-added
-          = f.collection_check_boxes :hoge, [], :hoge, :hoge, {}
       /// 価格
       = icon "fas", "yen-sign"
       = f.label :hoge, '価格', {class: "search-form__label"}
@@ -70,7 +56,6 @@
       = render partial: "items/item", collection: @items, as: :item
       #pagenation
         = paginate(@items)
-
     - else
       .result-none
         .result-none__title
