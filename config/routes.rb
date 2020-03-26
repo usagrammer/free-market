@@ -15,10 +15,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :items  do
+  resources :items, only: [:index, :new, :show, :edit]  do
     member do
       get "purchase_confirmation"
-      post "purchase"
+    end
+    collection do
+      get 'search'
     end
   end
   resources :categories, only: [:index, :show]

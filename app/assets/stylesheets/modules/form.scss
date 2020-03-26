@@ -205,32 +205,6 @@ select.select-category {
   display: block;
 }
 
-#brand-search {
-  position: relative;
-
-  &__result {
-    border: solid 1px black;
-    width: 100%;
-    height: 15rem;
-    background-color: white;
-    display: none;
-    overflow: scroll;
-    position: absolute;
-    top: 100%;
-
-    .brand-name {
-      cursor: pointer;
-    }
-
-    .brand-name:hover {
-      color: white;
-      background-color: skyblue;
-    }
-  }
-
-
-}
-
 #card-icons {
   // カード登録画面のカードの画像たち
   display: flex;

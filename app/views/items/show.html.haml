@@ -1,82 +1,67 @@
 .block.horizontal-padding-25
   .block__menu
-    = @item.name
+    = @item&.name
   .item-show
-    = render partial: 'layouts/sold_out', locals:{item: @item}
+    = render partial: 'shared/sold_out', locals:{item: @item}
     .item-show__images-data
       .item-images
         .item-images__main
           .item-images__main-images
-            - @item.item_images.each_with_index do |item_image, i|
-              = image_tag item_image.image.url, data: {big_image_index: i}
+            = image_tag "", data: {big_image_index: 0}
         .item-images__mini-images
-          - @item.item_images.each_with_index do |item_image, i|
-            = image_tag item_image.image.url, data: {mini_image_index: i}
+          = image_tag "", data: {mini_image_index: 0}
       %table.item-data
         %tr.item-data__row
           %th.item-data__row--title
             出品者
           %td.item-data__row--value
-            = @item.seller.nickname
+            hoge
         %tr.item-data__row
           %th.item-data__row--title
             カテゴリ
           %td.item-data__row--value
-            = link_to @item.category.root.name, ""
+            = link_to "hoge", ""
             %br
-            = link_to ">#{@item.category.parent.name}", ""
+            = link_to ">hoge", ""
             %br
-            = link_to ">#{@item.category.name}", ""
-        %tr.item-data__row
-          %th.item-data__row--title
-            ブランド
-          %td.item-data__row--value
-            = @item.get_brand
-        - if @item.item_size&.size&.name
-          %tr.item-data__row
-            %th.item-data__row--title
-              サイズ
-            %td.item-data__row--value
-              = @item.item_size.size.name
+            = link_to ">hoge", ""
         %tr.item-data__row
           %th.item-data__row--title
             商品の状態
           %td.item-data__row--value
-            = @item.condition
+            hoge
         %tr.item-data__row
           %th.item-data__row--title
             配送料の負担
           %td.item-data__row--value
-            = @item.delivery_fee_payer
+            hoge
         %tr.item-data__row
           %th.item-data__row--title
             配送の方法
           %td.item-data__row--value
-            = @item.delivery_method
+            hoge
         %tr.item-data__row
           %th.item-data__row--title
             配送元地域
           %td.item-data__row--value
-            = Prefecture.find(@item.delivery_agency).name
+            hoge
         %tr.item-data__row
           %th.item-data__row--title
             発送日の目安
           %td.item-data__row--value
-            = @item.delivery_days
+            hoge
     .item-show__price
       .item-show__price--left
-        = "¥#{@item.price}"
+        ¥1000
       .item-show__price--middle
         （税込）
       .item-show__price--right
-        = @item.delivery_fee_payer
+        送料込み
     = link_to "" do
       .button.back-red
         購入画面に進む
-    - if user_signed_in?
-      - if @item.seller_id == current_user.id
-        = link_to "" do
-          .button.back-gray
-            商品を編集する
+    = link_to "" do
+      .button.back-gray
+        商品を編集する
     .item-show__detail
-      = simple_format @item.detail
+      hoge

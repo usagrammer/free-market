@@ -1,6 +1,6 @@
 = link_to "", data:{turbolinks: false}  do
   .item
-    = render partial: 'layouts/sold_out', locals: {item: item}
+    = render partial: 'shared/sold_out', locals: {item: item}
     .item-top
       = image_tag item.item_images[0].image.url, class: "item-top__image"
       .item-top__price
