@@ -1,0 +1,35 @@
+.mypage-side-bar
+  .mypage-side-bar-lists
+    -# ユーザー管理機能実装時、マイページへのリンクを貼る
+    = render partial: 'shared/side_bar_list', locals: {text: "マイページ", path: "#", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "お知らせ", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "いいね！一覧", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "出品する", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "出品した商品---出品中", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "出品した商品---取引中", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "出品した商品---売却済", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "購入した商品---取引中", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "購入した商品---過去の取引", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "ニュース一覧", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "評価一覧", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "ガイド", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "お問い合わせ", path: "", method: ""}
+  .mypage-side-bar-lists
+    .mypage-side-bar-lists__top
+      売上・ポイント
+    = render partial: 'shared/side_bar_list', locals: {text: "売上・振込申請", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "ポイント", path: "", method: ""}
+  .mypage-side-bar-lists
+    .mypage-side-bar-lists__top
+      設定
+    = render partial: 'shared/side_bar_list', locals: {text: "プロフィール", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "住所変更", path: "", method: ""}
+    -# 購入機能を実装時、cards#showへのリンクを貼る
+    = render partial: 'shared/side_bar_list', locals: {text: "支払い方法", path: "#", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "メール/パスワード", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "本人情報", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "電話番号の確認", path: "", method: ""}
+    -# ユーザー管理機能を実装時、このボタンでログアウトできるようにする
+    = render partial: 'shared/side_bar_list', locals: {text: "ログアウト", path: "#", method: "delete"}
+  = link_to "https://itunes.apple.com/jp/app/id667861049?l=ja&mt=8" do
+    = image_tag "side_bar_banner.jpg", class: "side-bar-bottom"

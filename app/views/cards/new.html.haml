@@ -1,46 +1,49 @@
-.block.horizontal-padding-25
-  .block__menu
-    支払い方法
-.block.horizontal-padding-25
-  = form_with model: @card, id: "card_form" do |f|
-    .input-field
-      .input-field-main
-        = f.label :card_number, "カード番号"
-        %span.required-true
-          必須
-        %br
-        = f.text_field :card_number, required: true, maxlength: 16, id: "card_number_form", placeholder: "1234 5678 1234 5678"
-        #card-icons
-          = image_tag 'icon_visa.png'
-          = image_tag 'icon_master.jpg'
-          = image_tag 'icon_saison.png'
-          = image_tag 'icon_jcb.png'
-          = image_tag 'icon_american.svg'
-          = image_tag 'icon_diners.png'
-          = image_tag 'icon_discover.png'
-    .input-field
-      .input-field-main
-        = f.label :exp_month, "有効期限"
-        %span.required-true
-          必須
-        .input-field-multiple
-          = f.select :exp_month, options_for_select((1..12)), {include_blank: "---"}, id: "exp_month_form"
-          .input-field-multiple__separate-text
-            月
-          = f.select :exp_year, options_for_select((Date.today.year%100..Date.today.year%100 + 10)), {include_blank: "---"}, id: "exp_year_form"
-          .input-field-multiple__separate-text
-            年
-    .input-field
-      .input-field-main
-        = f.label :security, "セキュリティコード"
-        %span.required-true
-          必須
-        %br
-        = f.text_field :security, required: true,  id: "cvc_form", placeholder: "カード背面４桁もしくは３桁の番号"
-        %br
-        .information
-          .information__right.font-skyblue
-            = icon "fas", "question-circle", class:"header-bottom-left__button--red"
-            カード裏面の番号とは？
-        #card_token
-    = f.submit "次へ進む", class:"button back-red font-white", id: "regist_card"
+.mypage.horizontal-padding-15
+  = render 'shared/side_bar'
+  .mypage-main
+    .block.horizontal-padding-25
+      .block__menu
+        支払い方法
+    .block.horizontal-padding-25
+      = form_with id: "card_form" do |f|
+        .input-field
+          .input-field-main
+            = f.label :hoge, "カード番号"
+            %span.required-true
+              必須
+            %br
+            = f.text_field :hoge, required: true, maxlength: 16, id: "card_number_form", placeholder: "1234 5678 1234 5678"
+            #card-icons
+              = image_tag 'icon_visa.png'
+              = image_tag 'icon_master.jpg'
+              = image_tag 'icon_saison.png'
+              = image_tag 'icon_jcb.png'
+              = image_tag 'icon_american.svg'
+              = image_tag 'icon_diners.png'
+              = image_tag 'icon_discover.png'
+        .input-field
+          .input-field-main
+            = f.label :hoge, "有効期限"
+            %span.required-true
+              必須
+            .input-field-multiple
+              = f.select :hoge, [], {include_blank: "---"}, id: "exp_month_form"
+              .input-field-multiple__separate-text
+                月
+              = f.select :hoge, [], {include_blank: "---"}, id: "exp_year_form"
+              .input-field-multiple__separate-text
+                年
+        .input-field
+          .input-field-main
+            = f.label :hoge, "セキュリティコード"
+            %span.required-true
+              必須
+            %br
+            = f.text_field :hoge, required: true,  id: "cvc_form", placeholder: "カード背面４桁もしくは３桁の番号"
+            %br
+            .information
+              .information__right.font-skyblue
+                = icon "fas", "question-circle", class:"header-bottom-left__button--red"
+                カード裏面の番号とは？
+            #card_token
+        = f.submit "次へ進む", class:"button back-red font-white", id: "regist_card"
