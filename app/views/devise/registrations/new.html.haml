@@ -2,36 +2,37 @@
   .block__menu
     会員情報入力
   .block
-    = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
+    = form_with id: 'new_user', class: 'new_user', local: true do |f|
       .input-field
         .input-field-main
-          = f.label :nickname, "ニックネーム"
+          = f.label :hoge, "ニックネーム"
           %span.required-true
             必須
           %br
-          = f.text_field :nickname, required: true, placeholder: "例）メルカリ太郎"
+          = f.text_field :hoge, required: true, placeholder: "例）メルカリ太郎"
       .input-field
         .input-field-main
-          = f.label :email, "メールアドレス"
+          = f.label :hoge, "メールアドレス"
           %span.required-true
             必須
           %br
-          = f.text_field :email, required: true, placeholder: "PC・携帯どちらも可"
-      - if !session["devise.sns_auth"]
+          = f.text_field :hoge, required: true, placeholder: "PC・携帯どちらも可"
+      -# SNS認証の時はパスワード入力欄を消す
+      - if true
         .input-field
           .input-field-main
-            = f.label :password, "パスワード"
+            = f.label :hoge, "パスワード"
             %span.required-true
               必須
             %br
-            = f.password_field :password, required: true, placeholder: "6文字以上"
+            = f.password_field :hoge, required: true, placeholder: "6文字以上"
         .input-field
           .input-field-main
-            = f.label :password_confirmation, "パスワード（確認）"
+            = f.label :hoge, "パスワード（確認）"
             %span.required-true
               必須
             %br
-            = f.password_field :password_confirmation, required: true, placeholder: "6文字以上"
+            = f.password_field :hoge, required: true, placeholder: "6文字以上"
       .information
         .input-field-main
           .information__title
@@ -40,20 +41,20 @@
             安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
       .input-field
         .input-field-main
-          = f.label :first_name, "お名前（全角）"
+          = f.label :hoge, "お名前（全角）"
           %span.required-true
             必須
           .input-field-multiple
-            = f.text_field :first_name, required: true, placeholder: "例）山田"
-            = f.text_field :last_name, required: true, placeholder: "例）彩"
+            = f.text_field :hoge, required: true, placeholder: "例）山田"
+            = f.text_field :hoge, required: true, placeholder: "例）彩"
       .input-field
         .input-field-main
-          = f.label :first_name_reading, "お名前カナ（全角）"
+          = f.label :hoge, "お名前カナ（全角）"
           %span.required-true
             必須
           .input-field-multiple
-            = f.text_field :first_name_reading, required: true, placeholder: "例）ヤマダ"
-            = f.text_field :last_name_reading, required: true, placeholder: "例）アヤ"
+            = f.text_field :hoge, required: true, placeholder: "例）ヤマダ"
+            = f.text_field :hoge, required: true, placeholder: "例）アヤ"
       .input-field
         .input-field-main
           = f.label :birthday, "生年月日"
@@ -70,7 +71,7 @@
       .information
         .information__text
           「次へ進む」のボタンを押すことにより、利用規約に同意したものとみなします
-      -# = recaptcha_tags
+      -# recaptcha実装時にここへrecaptcha_tagsを入れる
       = f.submit "次へ進む", class:"button back-red font-white"
       %br
       本人情報の登録について＞

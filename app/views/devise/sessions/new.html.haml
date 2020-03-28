@@ -5,7 +5,7 @@
       %span.button__text
         新規会員登録
 -# ↓メールアドレス、Facebook、Googleの3つのボタン
-= render 'layouts/select_auth'
+= render 'devise/shared/select_auth'
 .block.horizontal-padding-25
   .forms
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
