@@ -1,20 +1,24 @@
 .parent-categories.horizontal-padding-25
   .parent-categories__title
     カテゴリー一覧
-  - Category.roots.each do |category|
+  -# 大カテゴリをeachで回す
+  - ['hoge'].each do |category|
     %span.parent-categories__category
       = link_to "" do
-        = category.name
-- Category.roots.each do |parent_category|
+        大カテゴリ名
+-# 大カテゴリをeachで回す
+- ['hoge'].each do |parent_category|
   .categories.horizontal-padding-25
     .parent-category
       = link_to "" do
-        = parent_category.name
-    - parent_category.get_children.each do |child_category|
+        大カテゴリ名
+    -# 中カテゴリをeachで回す
+    - ['hoge'].each do |child_category|
       .child-category
-        = child_category.name
+        中カテゴリ名
         .child-category__grand-child-categories
           = link_to "", class: "child-category__grand-child-categories--category" do
             すべて
-          - child_category.get_children.each do |grandchild_category|
-            = link_to grandchild_category.name, "", class: "child-category__grand-child-categories--category"
+          -# 小カテゴリをeachで回す
+          - ['hoge'].each do |grandchild_category|
+            = link_to "小カテゴリ名", "", class: "child-category__grand-child-categories--category"
