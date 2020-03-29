@@ -1,14 +1,13 @@
 = link_to "", data:{turbolinks: false}  do
   .item
-    = render partial: 'shared/sold_out', locals: {item: item}
+    = render partial: 'shared/sold_out'
     .item-top
-      = image_tag item.item_images[0].image.url, class: "item-top__image"
+      = image_tag "", class: "item-top__image"
       .item-top__price
-        ¥
-        = item.price
+        ¥1000
     .item-bottom
       .item-bottom__name
-        = item.name
+        商品名hoge
       .item-bottom-price-good
         .item-bottom-price-good__price
         = icon "fas", "heart", class:"item-bottom-price-good__good"
