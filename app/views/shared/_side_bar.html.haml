@@ -30,6 +30,6 @@
     = render partial: 'shared/side_bar_list', locals: {text: "本人情報", path: "", method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "電話番号の確認", path: "", method: ""}
     -# ユーザー管理機能を実装時、このボタンでログアウトできるようにする
-    = render partial: 'shared/side_bar_list', locals: {text: "ログアウト", path: "#", method: "delete"}
+    = render partial: 'shared/side_bar_list', locals: {text: "ログアウト", path: destroy_user_session_path, method: "delete"}
   = link_to "https://itunes.apple.com/jp/app/id667861049?l=ja&mt=8" do
     = image_tag "side_bar_banner.jpg", class: "side-bar-bottom"
