@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  prepend_before_action :check_recaptcha, only: [:create]
   layout 'no_menu'
 
   # GET /resource/sign_up
@@ -72,4 +73,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+  def check_recaptcha
+    redirect_to new_user_registration_path unless verify_recaptcha
+  end
+
 end
