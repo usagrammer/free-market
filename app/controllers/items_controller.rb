@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save!
+    if @item.save
       redirect_to root_path, notice: "出品に成功しました"
     else
       render :new
