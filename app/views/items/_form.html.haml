@@ -1,7 +1,7 @@
 .block
   .block__menu
     商品の情報を入力
-= form_with local: true, html: {id: "item_form"} do |f|
+= form_with model: @item, local: true, html: {id: "item_form"} do |f|
   .block.horizontal-padding-5
     .input-field
       .input-field-main
@@ -29,19 +29,19 @@
   .block.horizontal-padding-5
     .input-field
       .input-field-main
-        = f.label :hoge, "商品名"
+        = f.label :name, "商品名"
         %span.required-true
           必須
         %br
-        = f.text_field :hoge, required: true, placeholder: "PC・携帯どちらも可"
+        = f.text_field :name, required: true, placeholder: "PC・携帯どちらも可"
         .error-field{data:{column_name: "name"}}
     .input-field
       .input-field-main
-        = f.label :hoge, "商品の説明"
+        = f.label :detail, "商品の説明"
         %span.required-true
           必須
         %br
-        = f.text_area :hoge, required: true, placeholder: "6文字以上", rows: 5
+        = f.text_area :detail, required: true, placeholder: "6文字以上", rows: 5
         .error-field{data:{column_name: "detail"}}
   .block.horizontal-padding-5
     .input-field
@@ -49,50 +49,49 @@
         .input-field-title__text
           商品の詳細
       .input-field-main
-        = f.label :hoge, "カテゴリ"
+        = f.label :category_id, "カテゴリ"
         %span.required-true
           必須
-        = f.collection_select :hoge, [], :hoge , :hoge, {include_blank: "---"}, required: true, class: "select-category", id: "parent-category"
+        = f.collection_select :category_id, Category.all, :id, :name, {include_blank: "---"}, required: true, class: "select-category", id: "parent-category"
         .error-field{data:{column_name: "category"}}
-
-        = f.label :hoge, "商品の状態"
+        = f.label :condition, "商品の状態"
         %span.required-true
           必須
         %br
-        = f.select :hoge, [], {include_blank: "---"}
+        = f.select :condition, Item.conditions.keys, {include_blank: "---"}
   .block.horizontal-padding-5
     .input-field
       .input-field-title
         .input-field-title__text
           配送について
       .input-field-main
-        = f.label :hoge, "配送料の負担"
+        = f.label :delivery_fee_payer, "配送料の負担"
         %span.required-true
           必須
         %br
-        = f.select :hoge, [], {include_blank: "---"}
+        = f.select :delivery_fee_payer, Item.delivery_fee_payers.keys, {include_blank: "---"}
         .error-field{data:{column_name: "delivery_fee_payer"}}
         %br
         .input-field-main__delivery-method
-          = f.label :hoge, "配送の方法"
+          = f.label :delivery_method, "配送の方法"
           %span.required-true
             必須
           %br
-          = f.select :hoge, [], {include_blank: "---"}
+          = f.select :delivery_method, Item.delivery_methods.keys, {include_blank: "---"}
           %br
           .error-field{data:{column_name: "delivery_method"}}
-        = f.label :hoge, "発送元の地域"
+        = f.label :prefecture_id, "発送元の地域"
         %span.required-true
           必須
         %br
-        = f.collection_select :hoge, [], :hoge , :hoge, {include_blank: "---"}, required: true, placeholder: "発送元の地域"
-        .error-field{data:{column_name: "delivery_agency"}}
+        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, required: true, placeholder: "発送元の地域"
+        .error-field{data:{column_name: "prefecture_id"}}
         %br
-        = f.label :hoge, "発送までの日数"
+        = f.label :delivery_days, "発送までの日数"
         %span.required-true
           必須
         %br
-        = f.select :hoge, [], {include_blank: "---"}
+        = f.select :delivery_days, Item.delivery_days.keys, {include_blank: "---"}
         .error-field{data:{column_name: "delivery_days"}}
   .block.horizontal-padding-5
     .input-field
@@ -102,11 +101,11 @@
       .input-field-main
         .input-field-main-price
           .input-field-main-price__left
-            = f.label :hoge, "価格"
+            = f.label :price, "価格"
             %span.required-true
               必須
           .input-field-main-price__right
-            = f.text_field :hoge, required: true, placeholder: "価格"
+            = f.text_field :price, required: true, placeholder: "価格"
             .error-field{data:{column_name: "price"}}
         %hr
         .input-field-main-price
