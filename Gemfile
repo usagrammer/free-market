@@ -68,4 +68,6 @@ gem 'haml-rails'
 gem 'sassc', '2.1.0'
 gem 'font-awesome-sass'
 gem 'unicorn', '5.4.1'
+
 gem 'activerecord-import'
+gem 'active_hash'
