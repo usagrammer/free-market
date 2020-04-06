@@ -8,22 +8,22 @@
       .block__menu
         クレジットカード一覧
       -# ログイン中のユーザーがカード登録済みなら
-      -if false
+      -if @card
         .block__main
           .card-show.horizontal-padding-25
             .card-show__data
               = image_tag 'icon_visa.png'
-              = @card[:last4]
+              = "************" + @card[:last4]
               %br
               = @card[:exp_month]
               \/
               = @card[:exp_year]
               %br
               = @card[:brand]
-            =link_to "削除する", "", method: :delete, class: "delete-button"
+            = link_to "削除する", card_path(current_user), method: :delete, class: "delete-button"
       - else
         .block__main.horizontal-padding-25
-          = link_to "", data: {turbolinks: false} do
+          = link_to new_card_path, data: {turbolinks: false} do
             .button.regist-card
               = icon "far", "credit-card"
               %span.button__text

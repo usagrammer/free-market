@@ -1,6 +1,10 @@
 class CardsController < ApplicationController
   before_action :alreday_registered?, except: [:show, :destroy]
 
+  def show
+    @card = Card.get_card(current_user.card.customer_token) if current_user.card
+  end
+
   def new
     @card = Card.new
 
