@@ -5,7 +5,7 @@
       .block__menu
         支払い方法
     .block.horizontal-padding-25
-      = form_with id: "card_form" do |f|
+      = form_with model: @card, id: "card_form" do |f|
         .input-field
           .input-field-main
             = f.label :hoge, "カード番号"
