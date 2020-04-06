@@ -27,10 +27,10 @@
             %span.required-true
               必須
             .input-field-multiple
-              = f.select :hoge, [], {include_blank: "---"}, id: "exp_month_form"
+              = f.select :hoge, 1..12, {include_blank: "---"}, id: "exp_month_form"
               .input-field-multiple__separate-text
                 月
-              = f.select :hoge, [], {include_blank: "---"}, id: "exp_year_form"
+              = f.select :hoge, @exp_years, {include_blank: "---"}, id: "exp_year_form"
               .input-field-multiple__separate-text
                 年
         .input-field
