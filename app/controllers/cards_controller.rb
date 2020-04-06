@@ -31,6 +31,17 @@ class CardsController < ApplicationController
 
   end
 
+  def destroy
+    card = current_user.card
+
+    if card.destroy
+      redirect_to card_path(current_user), notice: "カードの削除が完了しました。"
+    else
+      redirect_to card_path(current_user), notice: "カードの削除に失敗しました。"
+    end
+
+  end
+
   private
 
   def alreday_registered?
