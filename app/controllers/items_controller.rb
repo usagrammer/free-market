@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path, notice: "出品に成功しました"
     else
-      render :new
+      render layout: 'no_menu', template: 'items/new' # レイアウトファイル指定
     end
   end
 
