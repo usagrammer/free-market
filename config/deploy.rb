@@ -31,3 +31,14 @@ namespace :deploy do
     invoke 'unicorn:restart'
   end
 end
+
+## bundle exec cap production deploy db_seedでrails db:seedを実行する
+task :db_seed do
+  on roles(:db) do |host|
+    with rails_env: fetch(:rails_env) do
+      within current_path do
+        execute :bundle, :exec, :rake, 'db:seed'
+      end
+    end
+  end
+end

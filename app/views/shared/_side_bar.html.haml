@@ -4,7 +4,7 @@
     = render partial: 'shared/side_bar_list', locals: {text: "マイページ", path: "#", method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "お知らせ", path: "", method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "いいね！一覧", path: "", method: ""}
-    = render partial: 'shared/side_bar_list', locals: {text: "出品する", path: "", method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "出品する", path: new_item_path, method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "出品した商品---出品中", path: "", method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "出品した商品---取引中", path: "", method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "出品した商品---売却済", path: "", method: ""}

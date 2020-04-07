@@ -9,6 +9,8 @@ class User < ApplicationRecord
   validates :last_name_reading, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'はカタカナで入力して下さい。'}
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,128}+\z/i }
 
+  has_many :selling_items, class_name: "Item", foreign_key: "seller_id"
+  has_many :bought_items, class_name: "Item", foreign_key: "buyer_id"
   has_one :card
 
 end
