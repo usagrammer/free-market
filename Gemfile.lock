@@ -37,6 +37,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_hash (3.1.0)
+      activesupport (>= 5.0.0)
     activejob (6.0.2.2)
       activesupport (= 6.0.2.2)
       globalid (>= 0.3.6)
@@ -45,6 +47,8 @@ GEM
     activerecord (6.0.2.2)
       activemodel (= 6.0.2.2)
       activesupport (= 6.0.2.2)
+    activerecord-import (1.0.4)
+      activerecord (>= 3.2)
     activestorage (6.0.2.2)
       actionpack (= 6.0.2.2)
       activejob (= 6.0.2.2)
@@ -278,6 +282,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_hash
+  activerecord-import
   bootsnap (>= 1.4.2)
   byebug
   capistrano

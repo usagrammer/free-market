@@ -11,7 +11,7 @@
   = render 'shared/flash'
   = render 'shared/header'
   = yield
-  = link_to root_path, data:{turbolinks: false} do
+  = link_to new_item_path, data:{turbolinks: false} do
     .sell-button
       .sell-button__text
         出品
