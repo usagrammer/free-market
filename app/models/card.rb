@@ -6,17 +6,6 @@ class Card < ApplicationRecord
 
     customer = Payjp::Customer.retrieve(customer_token)
     card_data = customer.cards.first
-
-    # binding.pry
-
-    # card = {}
-    # card_data = customer.cards.retrieve(customer.default_card)
-    # card[:last4] = "************" + card_data.last4
-    # card[:exp_month]= card_data.exp_month
-    # card[:exp_year] = card_data.exp_year - 2000
-    # card[:brand] = card_data.brand
-
-    # return card
   end
 
 end
