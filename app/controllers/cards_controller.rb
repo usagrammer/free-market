@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :alreday_registered?, except: [:show, :destroy]
+  before_action :redirect_registered_user, except: [:show, :destroy]
 
   def show
     @card = Card.get_card(current_user.card.customer_token) if current_user.card
@@ -44,7 +44,7 @@ class CardsController < ApplicationController
 
   private
 
-  def alreday_registered?
+  def redirect_registered_user
     redirect_to card_path(current_user), alert: "既にカードを登録済みです。" if current_user.card
   end
 
