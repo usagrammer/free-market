@@ -30,7 +30,7 @@
               = f.select :hoge, 1..12, {include_blank: "---"}, id: "exp_month_form"
               .input-field-multiple__separate-text
                 月
-              = f.select :hoge, @exp_years, {include_blank: "---"}, id: "exp_year_form"
+              = f.select :hoge, [[20, 2020], [21, 2021], [22, 2022], [23, 2023], [24, 2024], [25, 2025]], {include_blank: "---"}, id: "exp_year_form"
               .input-field-multiple__separate-text
                 年
         .input-field
