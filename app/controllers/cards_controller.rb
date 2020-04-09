@@ -18,10 +18,7 @@ class CardsController < ApplicationController
 
   def create
     Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
-    customer = Payjp::Customer.create(  ## 顧客の作成
-    email: current_user.email,
-    card: params[:payjp_token]
-    )
+    customer = Payjp::Customer.create(card: params[:payjp_token]) ## 顧客の作成
     card = current_user.build_card(card_token: params[:card_token], customer_token: customer.id)
     if card.save!
       redirect_to card_path(current_user), notice: "カードの登録が完了しました。"
