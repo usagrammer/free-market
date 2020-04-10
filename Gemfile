@@ -73,3 +73,5 @@ gem 'activerecord-import'
 gem 'active_hash'
 
 gem 'recaptcha', '>= 5.4.1',  require: "recaptcha/rails"
+
+gem 'payjp'
