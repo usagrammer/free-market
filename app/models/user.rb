@@ -15,6 +15,32 @@ class User < ApplicationRecord
   has_one :sns_credential, dependent: :destroy
 
   def self.from_omniauth(auth_data)
+    email = auth_data.info.email
+    nickname = auth_data.info.name
+    uid = auth_data.uid
+    provider = auth_data.provider
+
+    sns_credential = SnsCredential.where(uid: uid, provider: provider).first_or_initialize
+
+    ## sns_credential.userが居るならB（SNS認証で登録した）
+    user = sns_credential.user
+
+    unless user.present?
+      ## ここでuserがヒットしなかったらA（ユーザー登録したことがない）
+      ## ここでuserがヒットしたらD（メールで登録した）
+      user = User.where(email: email).first_or_initialize
+    end
+
+    if user.persisted?
+      ## ここにきた=D（メールで登録した）
+      sns_credential.user_id =  user.id
+      sns_credential.save
+    else
+      ## ここにきた＝userもsns_credentialもヒットしなかった=A（ユーザー登録したことがない）
+      user.nickname = nickname
+    end
+
+    return {user: user, sns_credential: sns_credential}
   end
 
 end
