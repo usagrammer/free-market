@@ -19,9 +19,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+
+    if session["devise.sns_auth"]
+      ## SNS認証でユーザー登録をしようとしている場合
+      ## パスワードが未入力なのでランダムで生成する
+      password = Devise.friendly_token[8,12]
+      ## 生成したパスワードをparamsに入れる
+      params[:user][:password] = password
+      params[:user][:password_confirmation] = password
+    end
+
+    build_resource(sign_up_params)  ## @user = User.new(user_params) をしているイメージ
+    resource.build_sns_credential(session["devise.sns_auth"]["sns_credential"])
+
+    if resource.save  ## @user.save をしているイメージ
+      set_flash_message! :notice, :signed_up  ## フラッシュメッセージのセット
+      sign_up(resource_name, resource)  ## 新規登録＆ログイン
+      respond_with resource, location: after_sign_up_path_for(resource)  ## リダイレクト
+    else
+      redirect_to new_user_registration_path, alert: @user.errors.full_messages
+    end
+
+  end
 
   # GET /resource/edit
   # def edit
@@ -47,7 +67,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  def select
   def select  ##登録方法の選択ページ
     session.delete("devise.sns_auth")## 追加
     @auth_text = "で登録する"
