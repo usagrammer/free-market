@@ -41,6 +41,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def select
+  def select  ##登録方法の選択ページ
+    session.delete("devise.sns_auth")## 追加
+    @auth_text = "で登録する"
   end
 
   def confirm_phone
