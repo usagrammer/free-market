@@ -14,4 +14,7 @@ class User < ApplicationRecord
   has_many :bought_items, class_name: "Item", foreign_key: "buyer_id"
   has_one :sns_credential, dependent: :destroy
 
+  def self.from_omniauth(auth_data)
+  end
+
 end
