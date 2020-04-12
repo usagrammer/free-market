@@ -31,7 +31,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     build_resource(sign_up_params)  ## @user = User.new(user_params) をしているイメージ
-    resource.build_sns_credential(session["devise.sns_auth"]["sns_credential"])
+    resource.build_sns_credential(session["devise.sns_auth"]["sns_credential"]) if session["devise.sns_auth"]
 
     if resource.save  ## @user.save をしているイメージ
       set_flash_message! :notice, :signed_up  ## フラッシュメッセージのセット
