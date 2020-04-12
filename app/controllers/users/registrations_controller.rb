@@ -24,7 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if session["devise.sns_auth"]
       ## SNS認証でユーザー登録をしようとしている場合
       ## パスワードが未入力なのでランダムで生成する
-      password = Devise.friendly_token[8,12]
+      password = Devise.friendly_token[8,12] + "1a"
       ## 生成したパスワードをparamsに入れる
       params[:user][:password] = password
       params[:user][:password_confirmation] = password
