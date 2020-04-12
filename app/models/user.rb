@@ -23,12 +23,14 @@ class User < ApplicationRecord
 
     sns_credential = SnsCredential.where(uid: uid, provider: provider).first_or_initialize
 
-    ## sns_credential.userが居るならB（SNS認証で登録した）
-    user = sns_credential.user
-
-    unless user.present?
-      ## ここでuserがヒットしなかったらA（ユーザー登録したことがない）
-      ## ここでuserがヒットしたらD（メールで登録した）
+    ## sns_credentialに紐付いたuserがいるかどうか
+    if sns_credential.user.present?
+      ## sns_credential.userが居るならB（SNS認証で登録した）が確定するのでここで終了
+      return {user: sns_credential.user, sns_credential: sns_credential}
+    else
+      ## sns_credentialに紐付いたuserがいない
+      ## googleから送られてきたemailでuserがヒットしたらD（メールで登録した）
+      ## userがヒットしなかったらA（ユーザー登録したことがない）
       user = User.where(email: email).first_or_initialize
     end
 
