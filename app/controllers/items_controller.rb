@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+  before_action :set_item, only: [:edit, :update, :destroy]
 
   def new
     @item = Item.new
@@ -38,4 +39,7 @@ class ItemsController < ApplicationController
       ).merge(seller_id: current_user.id)
   end
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
 end
