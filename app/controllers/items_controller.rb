@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy], unless: :seller?
 
   def new
     @item = Item.new
@@ -58,4 +59,13 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+  def move_to_index
+    redirect_to root_path, alert: "エラーが発生しました。"
+  end
+
+  def seller?
+    return @item.seller_id == current_user.id
+  end
+
 end
