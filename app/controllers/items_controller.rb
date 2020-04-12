@@ -20,6 +20,14 @@ class ItemsController < ApplicationController
     render layout: 'no_menu' # レイアウトファイル指定
   end
 
+  def update
+    if @item.update(item_params)
+      redirect_to root_path, notice: "商品の編集が完了しました。"
+    else
+      render layout: 'no_menu', action: :edit
+    end
+  end
+
   def purchase_confirmation
     render layout: 'no_menu' # レイアウトファイル指定
   end
