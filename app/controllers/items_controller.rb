@@ -28,6 +28,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if @item.destroy
+      redirect_to root_path, notice: "商品の削除が完了しました。"
+    else
+      redirect_to edit_item_path(@item), alert: "商品が削除できませんでした。"
+    end
+  end
+
   def purchase_confirmation
     render layout: 'no_menu' # レイアウトファイル指定
   end
