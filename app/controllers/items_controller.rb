@@ -20,6 +20,7 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @item.images.build
     render layout: 'no_menu' # レイアウトファイル指定
   end
 
