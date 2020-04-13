@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
       :delivery_days,
       :prefecture_id,
       :category_id,
-      images_attributes: [:src]
+      images_attributes: [:src, :id, :_destroy]
       ).merge(seller_id: current_user.id)
   end
 
