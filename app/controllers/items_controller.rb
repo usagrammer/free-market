@@ -22,6 +22,15 @@ class ItemsController < ApplicationController
     render layout: 'no_menu' # レイアウトファイル指定
   end
 
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to root_path, notice: "出品に成功しました"
+    else
+      render layout: 'no_menu', template: 'items/new' # レイアウトファイル指定
+    end
+  end
+
   def purchase_confirmation
     render layout: 'no_menu' # レイアウトファイル指定
   end
