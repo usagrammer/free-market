@@ -76,5 +76,7 @@ gem 'recaptcha', '>= 5.4.1',  require: "recaptcha/rails"
 
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'carrierwave'
+gem 'fog-aws'
 
 gem 'payjp'
