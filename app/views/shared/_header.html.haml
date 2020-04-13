@@ -56,7 +56,7 @@
             = image_tag 'user_noimage.png', class:"header-bottom-right__mypage"
             マイページ
       - else
-        = link_to new_user_registration_path,  data: {turbolinks: :false} do
+        = link_to users_select_path,  data: {turbolinks: :false} do
           新規会員登録
         = link_to new_user_session_path, data: {turbolinks: :false}  do
           ログイン

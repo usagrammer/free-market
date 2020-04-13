@@ -5,9 +5,10 @@ class Users::SessionsController < Devise::SessionsController
   layout 'no_menu'
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    @auth_text ="でログイン"
+    super
+  end
 
   # POST /resource/sign_in
   # def create

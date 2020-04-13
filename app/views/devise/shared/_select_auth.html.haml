@@ -12,7 +12,7 @@
       = icon "fab", "facebook-square", class: "button__facebook-icon"
       %span.button__text
         facebook#{@auth_text}
-  = link_to root_path, method: :post do
+  = link_to user_google_oauth2_omniauth_authorize_path, method: :post do
     .button.google
       = image_tag "google_icon.png", class: "button__google-icon"
       %span.button__text

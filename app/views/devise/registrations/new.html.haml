@@ -18,7 +18,7 @@
           %br
           = f.text_field :email, required: true, placeholder: "PC・携帯どちらも可"
       -# SNS認証の時はパスワード入力欄を消す
-      - if true
+      - unless @sns_auth
         .input-field
           .input-field-main
             = f.label :password, "パスワード"
