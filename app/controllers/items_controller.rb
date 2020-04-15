@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+  before_action :set_item, only: [:edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy], unless: :seller?
 
   def new
     @item = Item.new
@@ -19,6 +21,22 @@ class ItemsController < ApplicationController
     render layout: 'no_menu' # レイアウトファイル指定
   end
 
+  def update
+    if @item.update(item_params)
+      redirect_to root_path, notice: "商品の編集が完了しました。"
+    else
+      render layout: 'no_menu', action: :edit
+    end
+  end
+
+  def destroy
+    if @item.destroy
+      redirect_to root_path, notice: "商品の削除が完了しました。"
+    else
+      redirect_to edit_item_path(@item), alert: "商品が削除できませんでした。"
+    end
+  end
+
   def purchase_confirmation
     render layout: 'no_menu' # レイアウトファイル指定
   end
@@ -36,6 +54,18 @@ class ItemsController < ApplicationController
       :prefecture_id,
       :category_id
       ).merge(seller_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def move_to_index
+    redirect_to root_path, alert: "エラーが発生しました。"
+  end
+
+  def seller?
+    return @item.seller_id == current_user.id
   end
 
 end

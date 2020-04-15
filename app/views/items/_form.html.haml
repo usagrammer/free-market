@@ -129,11 +129,12 @@
         また、出品をもちまして加盟店規約に同意したことになります。
   .block.horizontal-padding-5
     = f.submit "出品する", class:"button back-red font-white"
-    = link_to "", method: :delete do
-      .button.back-gray
-        商品を削除する
-    .horizontal-padding-25
-      = link_to "" do
+    - if action_name == 'edit'
+      = link_to item_path(@item), method: :delete do
         .button.back-gray
-          戻る
+          商品を削除する
+      .horizontal-padding-25
+        = link_to "" do
+          .button.back-gray
+            戻る
 %script{ src: "https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.3.1/fuse.min.js" }
