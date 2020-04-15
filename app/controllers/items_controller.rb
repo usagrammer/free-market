@@ -16,14 +16,14 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path, notice: "出品に成功しました"
     else
-      redirect_to new_item_path, alert: @item.errors.full_messages
+      render layout: 'no_menu', template: 'items/new' # レイアウトファイル指定
     end
   end
 
   def edit
     @item = Item.find(params[:id])
     @item.images.build
-    render layout: 'no_menu'  # レイアウトファイル指定
+    render layout: 'no_menu' # レイアウトファイル指定
   end
 
   def update
@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to root_path, notice: "出品に成功しました"
     else
-      redirect_to edit_item_path(@item), alert: @item.errors.full_messages  ## ここを変更
+      render layout: 'no_menu', template: 'items/new' # レイアウトファイル指定
     end
   end
 
