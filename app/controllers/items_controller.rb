@@ -5,6 +5,9 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    3.times do
+      @item.images.build
+    end
     render layout: 'no_menu' # レイアウトファイルを指定
   end
 
@@ -13,12 +16,23 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path, notice: "出品に成功しました"
     else
-      render layout: 'no_menu', template: 'items/new' # レイアウトファイル指定
+      redirect_to new_item_path, alert: @item.errors.full_messages
     end
   end
 
   def edit
-    render layout: 'no_menu' # レイアウトファイル指定
+    @item = Item.find(params[:id])
+    @item.images.build
+    render layout: 'no_menu'  # レイアウトファイル指定
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to root_path, notice: "出品に成功しました"
+    else
+      redirect_to edit_item_path(@item), alert: @item.errors.full_messages  ## ここを変更
+    end
   end
 
   def update
@@ -52,7 +66,8 @@ class ItemsController < ApplicationController
       :delivery_method,
       :delivery_days,
       :prefecture_id,
-      :category_id
+      :category_id,
+      images_attributes: [:src, :id, :_destroy]
       ).merge(seller_id: current_user.id)
   end
 
