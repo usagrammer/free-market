@@ -40,8 +40,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash.now[:alert] = resource.errors.full_messages
       render :new and return
     end
-    session["devise.regist_data"] = {user: @user.attributes}  ## sessionに@userをencrypted_password込で入れる
-    session["devise.regist_data"][:user][:password] = params[:user][:password]  ## 暗号化前のパスワードをsessionに入れる
+    session["devise.user_object"] = @user.attributes  ## sessionに@userをencrypted_password込で入れる
+    session["devise.user_object"][:password] = params[:user][:password]  ## 暗号化前のパスワードをsessionに入れる
     respond_with resource, location: after_sign_up_path_for(resource)  ## リダイレクト
   end
 
@@ -84,7 +84,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create_address
     @address = Address.new(address_params)
     if @address.valid? ## バリデーションに引っかからない（save可能な）時
-      session["devise.regist_data"][:address] = @address
+      session["devise.address_object"] = @address
       redirect_to users_completed_path
     else  ## バリデーションに引っかかる（save不可な）時
       redirect_to users_new_address_path, alert: @address.errors.full_messages
@@ -93,9 +93,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def completed
     @progress = 5
-    @user = build_resource(session["devise.regist_data"]["user"])
-    @user.build_sns_credential(session["devise.sns_auth"]["sns"]) if session["devise.sns_auth"] ## sessionがあるとき＝sns認証でここまできたとき
-    @user.build_address(session["devise.regist_data"]["address"])
+    @user = build_resource(session["devise.user_object"])
+    @user.build_sns_credential(session["devise.sns_auth"]["sns_credential"]) if session["devise.sns_auth"] ## sessionがあるとき＝sns認証でここまできたとき
+    @user.build_address(session["devise.address_object"])
     if @user.save
       sign_up(resource_name, resource)  ## ログインさせる
     else
@@ -146,15 +146,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def session_has_not_user
-    unless session["devise.regist_data"]&.dig("user").present?
-      redirect_to new_user_registration_path, alert: "会員情報を入力してください。"
-    end
+    redirect_to new_user_registration_path, alert: "会員情報を入力してください。" unless session["devise.user_object"]
   end
 
   def session_has_not_address
-    unless session["devise.regist_data"]&.dig("address").present?
-      redirect_to new_user_registration_path, alert: "会員情報を入力してください。"
-    end
+    redirect_to new_user_registration_path, alert: "会員情報を入力してください。" unless session["devise.address_object"]
   end
 
 end
