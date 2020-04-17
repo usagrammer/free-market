@@ -131,4 +131,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     redirect_to new_user_registration_path unless verify_recaptcha(message: "reCAPTCHAを承認してください")
   end
 
+  def address_params
+    params.require(:address).permit(
+      :phone_number,
+      :postal_code,
+      :prefecture_id,
+      :city,
+      :house_number,
+      :building_name,
+      )
+  end
 end
