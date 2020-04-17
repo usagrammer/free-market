@@ -79,6 +79,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @address = Address.new
   end
 
+  def create_address
+    @address = Address.new(address_params)
+    if @address.valid? ## バリデーションに引っかからない（save可能な）時
+      session["devise.regist_data"][:address] = @address
+      redirect_to users_completed_path
+    else  ## バリデーションに引っかかる（save不可な）時
+      redirect_to users_new_address_path, alert: @address.errors.full_messages
+    end
   end
 
   def completed
