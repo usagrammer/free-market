@@ -104,6 +104,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   private
+  def after_sign_up_path_for(resource)
+    users_confirm_phone_path
+  end
+
   def check_recaptcha
     redirect_to new_user_registration_path unless verify_recaptcha(message: "reCAPTCHAを承認してください")
   end
