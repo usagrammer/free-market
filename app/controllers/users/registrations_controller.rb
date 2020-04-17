@@ -31,16 +31,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     build_resource(sign_up_params)  ## @user = User.new(user_params) をしているイメージ
-    resource.build_sns_credential(session["devise.sns_auth"]["sns_credential"]) if session["devise.sns_auth"]
-
-    if resource.save  ## @user.save をしているイメージ
-      set_flash_message! :notice, :signed_up  ## フラッシュメッセージのセット
-      sign_up(resource_name, resource)  ## 新規登録＆ログイン
-      respond_with resource, location: after_sign_up_path_for(resource)  ## リダイレクト
-    else
-      redirect_to new_user_registration_path, alert: @user.errors.full_messages
+    unless resource.valid? ## 登録に失敗したとき
+      ## 進捗バー用の@progressとflashメッセージをセットして戻る
+      @progress = 1
+      flash.now[:alert] = resource.errors.full_messages
+      render :new and return
     end
-
+    session["devise.regist_data"] = {user: @user.attributes}  ## sessionに@userをencrypted_password込で入れる
+    session["devise.regist_data"][:user][:password] = params[:user][:password]  ## 暗号化前のパスワードをsessionに入れる
+    respond_with resource, location: after_sign_up_path_for(resource)  ## リダイレクト
   end
 
   # GET /resource/edit
