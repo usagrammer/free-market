@@ -89,6 +89,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def completed
+    @progress = 5
+    @user = build_resource(session["devise.regist_data"]["user"])
+    @user.build_sns_credential(session["devise.sns_auth"]["sns"]) if session["devise.sns_auth"] ## sessionがあるとき＝sns認証でここまできたとき
+    @user.build_address(session["devise.regist_data"]["address"])
+    if @user.save
+      sign_up(resource_name, resource)  ## ログインさせる
+    else
+      redirect_to root_path, alert: @user.errors.full_messages
+    end
   end
 
   # protected
