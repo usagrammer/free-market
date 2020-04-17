@@ -2,7 +2,7 @@
   .block__menu
     住所入力
 .block.horizontal-padding-25
-  = form_with id: 'new_address', class: 'new_address', local: true do |f|
+  = form_with model: @address, url: users_create_address_path, id: 'new_address', class: 'new_address', local: true do |f|
     .input-field
       .input-field-main
         = f.label :hoge, "郵便番号"
