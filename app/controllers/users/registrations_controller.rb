@@ -36,6 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     unless resource.valid? ## 登録に失敗したとき
       ## 進捗バー用の@progressとflashメッセージをセットして戻る
       @progress = 1
+      @sns_auth = true if session["devise.sns_auth"]
       flash.now[:alert] = resource.errors.full_messages
       render :new and return
     end
