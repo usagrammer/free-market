@@ -4,6 +4,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   prepend_before_action :check_recaptcha, only: [:create]
+  before_action :session_has_not_user, only: [:confirm_phone, :new_address, :create_address, :completed]
+  before_action :session_has_not_address, only: [:completed]
   layout 'no_menu'
 
   # GET /resource/sign_up
@@ -141,4 +143,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
       :building_name,
       )
   end
+
+  def session_has_not_user
+    unless session["devise.regist_data"]&.dig("user").present?
+      redirect_to new_user_registration_path, alert: "会員情報を入力してください。"
+    end
+  end
+
+  def session_has_not_address
+    unless session["devise.regist_data"]&.dig("address").present?
+      redirect_to new_user_registration_path, alert: "会員情報を入力してください。"
+    end
+  end
+
 end
