@@ -5,44 +5,44 @@
   = form_with model: @address, url: users_create_address_path, id: 'new_address', class: 'new_address', local: true do |f|
     .input-field
       .input-field-main
-        = f.label :hoge, "郵便番号"
+        = f.label :postal_code, "郵便番号"
         %span.required-true
           必須
         %br
-        = f.text_field :hoge, required: true, placeholder: "例）123-4567"
+        = f.text_field :postal_code, required: true, placeholder: "例）123-4567"
     .input-field
       .input-field-main
-        = f.label :hoge, "都道府県"
+        = f.label :prefecture_id, "都道府県"
         %span.required-true
           必須
         %br
-        = f.collection_select :hoge, [], :id , :name, {include_blank: "---"}, required: true
+        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, required: true
     .input-field
       .input-field-main
-        = f.label :hoge, "市区町村"
+        = f.label :city, "市区町村"
         %span.required-true
           必須
         %br
-        = f.text_field :hoge, required: true, placeholder: "例）横浜市緑区"
+        = f.text_field :city, required: true, placeholder: "例）横浜市緑区"
     .input-field
       .input-field-main
-        = f.label :hoge, "番地"
+        = f.label :house_number, "番地"
         %span.required-true
           必須
         %br
-        = f.text_field :hoge, required: true, placeholder: "例）青山1-1-1"
+        = f.text_field :house_number, required: true, placeholder: "例）青山1-1-1"
     .input-field
       .input-field-main
-        = f.label :hoge, "建物名"
+        = f.label :building_name, "建物名"
         %span.required-false
           任意
         %br
-        = f.text_field :hoge, placeholder: "例）柳ビル103"
+        = f.text_field :building_name, placeholder: "例）柳ビル103"
     .input-field
       .input-field-main
-        = f.label :hoge, "電話番号"
+        = f.label :phone_number, "電話番号"
         %span.required-false
           任意
         %br
-        = f.text_field :hoge, placeholder: "例）09012345678"
+        = f.text_field :phone_number, placeholder: "例）09012345678"
     = f.submit "次へ進む", class:"button back-red font-white"
