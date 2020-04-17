@@ -76,6 +76,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def new_address
+    @address = Address.new
+  end
+
   end
 
   def completed
