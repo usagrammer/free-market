@@ -10,7 +10,7 @@ document.addEventListener('turbolinks:load', function () {
                `;
     return html;
   }
-  /////////newUploadItemImageField()ここまで/////////
+  /////////newFileField()ここまで/////////
 
   ///////////////////////////////////////////////////////////////
   /////////画像の投稿ボタン（グレーのブロック）をクリックした時。/////////
