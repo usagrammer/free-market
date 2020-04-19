@@ -2,6 +2,8 @@ document.addEventListener('turbolinks:load', function () {
 
   if (!$('#item_form')[0]) return false; //商品出品・編集ページではないなら以降実行しない。
 
+  const image_limit = 5; // UP出来る画像の枚数
+
   function newFileField(index) { //新規画像投稿用のfile_fieldを作成しappendする。
     let html = `
                <input accept="image/*" class="new-item-image" style="display: block;" data-index="${index}" type="file" name="item[images_attributes][${index}][src]" id="item_images_attributes_${index}_src">
@@ -18,6 +20,19 @@ document.addEventListener('turbolinks:load', function () {
     file_field.trigger("click"); // file_fieldをクリックさせる。
   });
   /////////画像の投稿ボタン（グレーのブロック）をクリックした時ここまで/////////
+
+  /////////////////////////////////////////////
+  /////////画像の上限オーバー防止/////////
+  ////////////////////////////////////////////
+  $(`#image-file-fields`).on("click", `.new-item-image`, function (e) { // file_field.trigger("click")でクリックされた時
+    if (image_limit <= $(".item-image.new").length) { // 画像の枚数制限をオーバーするならキャンセル
+      e.preventDefault();
+      alert(`商品画像は${image_limit}枚までです。`);
+      return false;
+    }
+  });
+  /////////画像の上限オーバー防止ここまで/////////
+
   /////////////////////////////////////////////
   /////////file_fieldが変化した時/////////
   ////////////////////////////////////////////
