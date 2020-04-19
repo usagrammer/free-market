@@ -17,21 +17,14 @@ document.addEventListener('turbolinks:load', function () {
   ///////////////////////////////////////////////////////////////
   $("#select-image-button").on("click", function () {
     const file_field = $(".new-item-image:last"); // 新規画像投稿用のfile_fieldのを取得する。
-    file_field.trigger("click"); // file_fieldをクリックさせる。
-  });
-  /////////画像の投稿ボタン（グレーのブロック）をクリックした時ここまで/////////
-
-  /////////////////////////////////////////////
-  /////////画像の上限オーバー防止/////////
-  ////////////////////////////////////////////
-  $("#image-file-fields").on("click", `.new-item-image`, function (e) { // file_field.trigger("click")でクリックされた時
     if (image_limit <= $(".item-image.new").length) { // 画像の枚数制限をオーバーするならキャンセル
       e.preventDefault();
       alert(`商品画像は${image_limit}枚までです。`);
       return false;
     }
+    file_field.trigger("click"); // file_fieldをクリックさせる。
   });
-  /////////画像の上限オーバー防止ここまで/////////
+  /////////画像の投稿ボタン（グレーのブロック）をクリックした時ここまで/////////
 
   /////////////////////////////////////////////
   /////////file_fieldが変化した時/////////
