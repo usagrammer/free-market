@@ -1,5 +1,14 @@
 document.addEventListener('turbolinks:load', function () {
+
   if (!$('#item_form')[0]) return false; //商品出品・編集ページではないなら以降実行しない。
+
+  function newFileField(index) { //新規画像投稿用のfile_fieldを作成しappendする。
+    let html = `
+               <input accept="image/*" class="new-item-image" style="display: block;" data-index="${index}" type="file" name="item[images_attributes][${index}][src]" id="item_images_attributes_${index}_src">
+               `;
+    return html;
+  }
+  /////////newUploadItemImageField()ここまで/////////
 
   ///////////////////////////////////////////////////////////////
   /////////画像の投稿ボタン（グレーのブロック）をクリックした時。/////////
