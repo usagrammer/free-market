@@ -10,8 +10,7 @@ Rails.application.routes.draw do
     get 'users/select' => 'users/registrations#select'
     get 'users/confirm_phone' => 'users/registrations#confirm_phone'    ## ③電話番号認証画面のアクション
     get 'users/new_address' => 'users/registrations#new_address'        ## ④addressのフォームのアクション
-    post 'users/create_address' => 'users/registrations#create_address' ## ⑤addressをsaveするアクション
-    get 'users/completed' => 'users/registrations#completed'            ## ⑥完了画面
+    post 'users/completed' => 'users/registrations#completed'            ## ⑥完了画面
   end
 
   resources :users, only: [:show]

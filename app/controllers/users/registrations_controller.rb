@@ -84,21 +84,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @address = Address.new
   end
 
-  def create_address
+  def completed
     @address = Address.new(address_params)
-    if @address.valid? ## バリデーションに引っかからない（save可能な）時
-      session["devise.address_object"] = @address
-      redirect_to users_completed_path
-    else  ## バリデーションに引っかかる（save不可な）時
+    if @address.invalid? ## バリデーションに引っかかる（save不可な）時
       redirect_to users_new_address_path, alert: @address.errors.full_messages
     end
-  end
-
-  def completed
+    ## user,sns_credential,addressの登録とログインをする
     @progress = 5
     @user = build_resource(session["devise.user_object"])
     @user.build_sns_credential(session["devise.sns_auth"]["sns_credential"]) if session["devise.sns_auth"] ## sessionがあるとき＝sns認証でここまできたとき
-    @user.build_address(session["devise.address_object"])
+    @user.address = @address
     if @user.save
       sign_up(resource_name, resource)  ## ログインさせる
     else
