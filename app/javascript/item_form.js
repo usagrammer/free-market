@@ -17,7 +17,7 @@ document.addEventListener('turbolinks:load', function () {
   ///////////////////////////////////////////////////////////////
   $("#select-image-button").on("click", function () {
     const file_field = $(".new-item-image:last"); // 新規画像投稿用のfile_fieldのを取得する。
-    if (image_limit <= $(".item-image.new").length) { // 画像の枚数制限をオーバーするならキャンセル
+    if ($(".item-image.new").length >= image_limit) { // 画像の枚数制限をオーバーするならキャンセル
       e.preventDefault();
       alert(`商品画像は${image_limit}枚までです。`);
       return false;
