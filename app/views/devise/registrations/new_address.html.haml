@@ -16,7 +16,7 @@
         %span.required-true
           必須
         %br
-        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, required: true
+        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {include_blank: "---"}, {required: true}
     .input-field
       .input-field-main
         = f.label :city, "市区町村"
