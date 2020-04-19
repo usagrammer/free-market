@@ -16,7 +16,7 @@ document.addEventListener('turbolinks:load', function () {
   /////////画像の投稿ボタン（グレーのブロック）をクリックした時。/////////
   ///////////////////////////////////////////////////////////////
   $("#select-image-button").on("click", function () {
-    const file_field = $(`.new-item-image:last`); // 新規画像投稿用のfile_fieldのを取得する。
+    const file_field = $(".new-item-image:last"); // 新規画像投稿用のfile_fieldのを取得する。
     file_field.trigger("click"); // file_fieldをクリックさせる。
   });
   /////////画像の投稿ボタン（グレーのブロック）をクリックした時ここまで/////////
@@ -24,7 +24,7 @@ document.addEventListener('turbolinks:load', function () {
   /////////////////////////////////////////////
   /////////画像の上限オーバー防止/////////
   ////////////////////////////////////////////
-  $(`#image-file-fields`).on("click", `.new-item-image`, function (e) { // file_field.trigger("click")でクリックされた時
+  $("#image-file-fields").on("click", `.new-item-image`, function (e) { // file_field.trigger("click")でクリックされた時
     if (image_limit <= $(".item-image.new").length) { // 画像の枚数制限をオーバーするならキャンセル
       e.preventDefault();
       alert(`商品画像は${image_limit}枚までです。`);
@@ -37,7 +37,7 @@ document.addEventListener('turbolinks:load', function () {
   /////////file_fieldが変化した時/////////
   ////////////////////////////////////////////
 
-  $(`#image-file-fields`).on("change", `input[type="file"]`, function (e) { //新しく画像が選択された、もしくは変更しようとしたが何も選択しなかった時
+  $("#image-file-fields").on("change", `input[type="file"]`, function (e) { //新しく画像が選択された、もしくは変更しようとしたが何も選択しなかった時
     const file = e.target.files[0];
     const blob_url = window.URL.createObjectURL(file); //選択された画像をblob url形式に変換する。
     let index = $(this).data("index");
