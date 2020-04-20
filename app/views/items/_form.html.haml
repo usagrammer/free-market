@@ -59,7 +59,7 @@
         = f.label :category_id, "カテゴリ"
         %span.required-true
           必須
-        = f.collection_select :category_id, Category.roots, :id, :name, {include_blank: "---", selected: @item.category.root_id}, required: true, class: "select-category", id: "parent-category"
+        = f.collection_select :category_id, Category.roots, :id, :name, {include_blank: "---", selected: @item.category&.root_id}, required: true, class: "select-category", id: "parent-category"
         - if @item.category.present?
           = f.collection_select :category_id, @item.category.parent.siblings, :id, :name, {include_blank: "---", selected: @item.category.parent_id}, required: true, class: "select-category"
           = f.collection_select :category_id, @item.category.siblings, :id, :name, {include_blank: "---"}, required: true, class: "select-category"
