@@ -5,9 +5,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    3.times do
-      @item.images.build
-    end
+    @item.images.build
     render layout: 'no_menu' # レイアウトファイルを指定
   end
 

@@ -54,7 +54,7 @@ class Item < ApplicationRecord
 
   def images_range
     errors.add(:images, "を1枚以上選択してください") if images.size < 1
-    errors.add(:imagess, "は10枚までです") if images.size > 10
+    errors.add(:images, "は10枚までです") if images.size > 5
   end
 
 end
