@@ -21,6 +21,7 @@ document.addEventListener('turbolinks:load', function () {
 
   $(".input-field-main").on("change", ".select-category", function () { //カテゴリが選択された時
     const category_id = $(this).val(); // 選択されたカテゴリのidを取得
+    var changed_form = $(this); // ajax後でもthisが使えるようにするため
     $.ajax({
         url: "/api/categories",
         type: "GET",
@@ -30,10 +31,10 @@ document.addEventListener('turbolinks:load', function () {
         dataType: 'json',
       }).done(function (categories) {
         if (categories.length == 0) return false; // categoriesが空 = 選択されたのが孫カテゴリなら何もせず終了
-        $(this).nextAll(".select-category").remove(); // 重複して表示させないために変更されたフォームより後ろのフォームを削除
+        changed_form.nextAll(".select-category").remove(); // 重複して表示させないために変更されたフォームより後ろのフォームを削除
         const html = buildCategoryForm(categories); // カテゴリのフォームを組み立てる
         $(".select-category:last").after(html); // 組み立てたフォームを表示
-      }.bind(this)) //  -----ここにbind(this)を追加するとajax後でもthisが維持される-----
+      })
       .fail(function () {
         alert('error');
       })
