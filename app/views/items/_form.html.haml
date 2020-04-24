@@ -28,10 +28,9 @@
         %br
         = image.object.src
         %br
-        = image.file_field :src, accept: "image/*"
+        = image.file_field :src, accept: "image/*", class: "new-item-image", style: "display: block;", data: {index: image.index}
         - if image.object.persisted?
           = image.check_box :_destroy, include_hidden: false, style: "display: block;"
-      = file_field_tag :hoge, class: "new-item-image", id: "file_field_index_0", accept: "image/*", data: {index: 0}
     .error-field{data:{column_name: "item_images"}}
   .block.horizontal-padding-5
     .input-field
