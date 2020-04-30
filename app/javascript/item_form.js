@@ -22,8 +22,10 @@ document.addEventListener("turbolinks:load", function () {
     return html;
   }
   /////////buildImagePreview()ここまで/////////
+
+  function newFileField(index) {
+    //新規画像投稿用のfile_fieldを作成する。
     const html = `
-               <input accept="image/*" class="new-item-image" style="display: block;" data-index="${index}" type="file" name="item[images_attributes][${index}][src]" id="item_images_attributes_${index}_src">
                <input accept="image/*" class="new-item-image" data-index="${index}" type="file" name="item[images_attributes][${index}][src]" id="item_images_attributes_${index}_src">
                `;
     return html;
@@ -34,8 +36,9 @@ document.addEventListener("turbolinks:load", function () {
   /////////画像の投稿ボタン（グレーのブロック）をクリックした時。/////////
   ///////////////////////////////////////////////////////////////
   $("#select-image-button").on("click", function () {
-    const file_field = $(".new-item-image:last"); // 新規画像投稿用のfile_fieldのを取得する。
-    if ($(".item-image.new").length >= image_limit) { // 画像の枚数制限をオーバーするならキャンセル
+    const file_field = $(".new-item-image:last"); // 新規画像投稿用のfile_fieldを取得する。
+    if ($(".item-image.new").length >= image_limit) {
+      // 画像の枚数制限をオーバーするならキャンセル
       e.preventDefault();
       alert(`商品画像は${image_limit}枚までです。`);
       return false;
@@ -50,7 +53,6 @@ document.addEventListener("turbolinks:load", function () {
 
   $("#image-file-fields").on("change", `input[type="file"]`, function (e) { //新しく画像が選択された、もしくは変更しようとしたが何も選択しなかった時
     const file = e.target.files[0];
-    const blob_url = window.URL.createObjectURL(file); //選択された画像をblob url形式に変換する。
     let index = $(this).data("index");
     if (!file) { // fileが空→編集ボタンをクリックしたが何も選択しなかった
       // 削除ボタンを起動させて終了
@@ -65,12 +67,12 @@ document.addEventListener("turbolinks:load", function () {
       preview_image.attr("src", blob_url); // プレビュー画像のsrc属性を書き換えることで画像が変わる
       return false;
     }
+    // 以下は画像の新規追加処理
     const preview_html = buildImagePreview(blob_url, index); // プレビュー画像を組み立てる
+    $("#select-image-button").before(preview_html); // プレビュー画像をビューに表示する
     index += 1;
-    const file_field_html = newFileField(index);
-    $("#image-file-fields").append(file_field_html);
-    const preview_html = `<img class="item-image new" src="${blob_url}" width="20%">`;
-    $("#select-image-button").before(preview_html);
+    const file_field_html = newFileField(index); // 次の画像のためのfile_fieldを組み立てる
+    $("#image-file-fields").append(file_field_html); // file_fieldを追加する
   });
   /////////file_fieldが変化した時ここまで/////////
 
