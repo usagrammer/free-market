@@ -26,12 +26,9 @@
               クリックしてファイルをアップロード
     #image-file-fields
       = f.fields_for :images do |image|
-        %br
-        = image.object.src
-        %br
-        = image.file_field :src, accept: "image/*", class: "new-item-image", style: "display: block;", data: {index: image.index}
+        = image.file_field :src, accept: "image/*", class: "new-item-image", data: {index: image.index}
         - if image.object.persisted?
-          = image.check_box :_destroy, include_hidden: false, style: "display: block;"
+          = image.check_box :_destroy, include_hidden: false
     .error-field{data:{column_name: "item_images"}}
   .block.horizontal-padding-5
     .input-field
