@@ -1,10 +1,27 @@
-document.addEventListener('turbolinks:load', function () {
+document.addEventListener("turbolinks:load", function () {
 
-  if (!$('#item_form')[0]) return false; //商品出品・編集ページではないなら以降実行しない。
+  if (!$("#item_form")[0]) return false; //商品出品・編集ページではないなら以降実行しない。
 
   const image_limit = 5; // UP出来る画像の枚数
 
-  function newFileField(index) { //新規画像投稿用のfile_fieldを作成しappendする。
+  function buildImagePreview(blob_url, index) {
+    //選択した画像ファイルのプレビューを表示する。
+    html = `
+            <div class="item-image new" data-index=${index}>
+              <img src =${blob_url} class="item-image__image">
+              <div class="item-image__buttons">
+                <div class="item-image__buttons--edit">
+                編集
+                </div>
+                <div class="item-image__buttons--delete">
+                削除
+                </div>
+              </div>
+            </div>
+            `;
+    return html;
+  }
+  /////////buildImagePreview()ここまで/////////
     const html = `
                <input accept="image/*" class="new-item-image" style="display: block;" data-index="${index}" type="file" name="item[images_attributes][${index}][src]" id="item_images_attributes_${index}_src">
                `;
@@ -34,6 +51,7 @@ document.addEventListener('turbolinks:load', function () {
     const file = e.target.files[0];
     const blob_url = window.URL.createObjectURL(file); //選択された画像をblob url形式に変換する。
     let index = $(this).data("index");
+    const preview_html = buildImagePreview(blob_url, index); // プレビュー画像を組み立てる
     index += 1;
     const file_field_html = newFileField(index);
     $("#image-file-fields").append(file_field_html);
