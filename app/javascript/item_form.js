@@ -60,4 +60,14 @@ document.addEventListener("turbolinks:load", function () {
   });
   /////////file_fieldが変化した時ここまで/////////
 
+  /////////////////////////////////////////////
+  /////////画像の削除ボタンをクリックした時/////////
+  ////////////////////////////////////////////
+  $("#selected-item-images").on("click", ".item-image__buttons--delete", function (e) {
+    const index = $(this).parents(".item-image").data("index"); // 何番目の画像を削除しようとしているかを取得する
+    $(this).parents(".item-image").remove(); // プレビュー画像とボタンをまとめている親要素を削除する
+    $(`#item_images_attributes_${index}__destroy`).prop("checked", true); // 削除のON/OFFを表すチェックボックスにチェックを入れる
+    $(`#item_images_attributes_${index}_src`).remove(); // file_fieldを削除する
+  });
+  /////////画像の削除ボタンをクリックした時ここまで/////////
 });
