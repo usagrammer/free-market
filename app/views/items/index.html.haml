@@ -20,19 +20,41 @@
 .pickups-header
   人気のカテゴリー
   .pickups-header__category-names
-    - @category_ranking&.each do |category|
-      = link_to "" do
-        .pickups-header__category-names--category-name
-          = category.name
+    = link_to category_path(@ladies_category) do
+      .pickups-header__category-names--category-name
+        = @ladies_category.name
+    = link_to category_path(@mens_category) do
+      .pickups-header__category-names--category-name
+        = @mens_category.name
+    = link_to category_path(@kids_category) do
+      .pickups-header__category-names--category-name
+        = @kids_category.name
 .pickups.horizontal-padding-15
   %br
-  - @sorted_items&.each do |items|
-    .pickup
-      %span.pickup__name
-        = items[0].category.root.name
-        新着アイテム
-      = link_to "" do
-        %span.pickup__display-all
-          もっと見る >
-      .pickup__items{class: "#{'auto-slick' if items.length >= 4}"}
-        = render items
+  .pickup
+    %span.pickup__name
+      = @ladies_category.name
+      新着アイテム
+    = link_to category_path(@ladies_category) do
+      %span.pickup__display-all
+        もっと見る >
+    .pickup__items
+      = render @ladies_items
+  .pickup
+    %span.pickup__name
+      = @mens_category.name
+      新着アイテム
+    = link_to category_path(@mens_category) do
+      %span.pickup__display-all
+        もっと見る >
+    .pickup__items
+      = render @mens_items
+  .pickup
+    %span.pickup__name
+      = @ladies_category.name
+      新着アイテム
+    = link_to category_path(@kids_category) do
+      %span.pickup__display-all
+        もっと見る >
+    .pickup__items
+      = render @kids_items
