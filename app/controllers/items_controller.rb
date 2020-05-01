@@ -3,6 +3,15 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy], unless: :seller?
 
+  def index
+    @ladies_category = Category.find(1)
+    @mens_category = Category.find(200)
+    @kids_category = Category.find(345)
+    @ladies_items = Item.search_by_categories(@ladies_category.subtree_ids).new_items
+    @mens_items = Item.search_by_categories(@mens_category.subtree_ids).new_items
+    @kids_items = Item.search_by_categories(@kids_category.subtree_ids).new_items
+  end
+
   def new
     @item = Item.new
     @item.images.build
