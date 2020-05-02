@@ -60,9 +60,10 @@
         （税込）
       .item-show__price--right
         送料込み
-    = link_to "" do
-      .button.back-red
-        購入画面に進む
+    - if @item.seller != current_user
+      = link_to "" do
+        .button.back-red
+          購入画面に進む
     - if @item.seller == current_user
       = link_to edit_item_path(@item) do
         .button.back-gray
