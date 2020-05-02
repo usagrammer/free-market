@@ -50,7 +50,13 @@ class Item < ApplicationRecord
     "売り切れ": 1
     }
 
-  private
+  scope :new_items, -> { order("created_at DESC").limit(4) }
+
+  def self.search_by_categories(category_ids)
+    return Item.where(category_id: category_ids).includes(:images)
+  end
+
+    private
 
   def images_range
     errors.add(:images, "を1枚以上選択してください") if images.size < 1
