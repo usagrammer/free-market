@@ -44,7 +44,7 @@
   .block__main
     #card-data
       - if @card
-        = @card[:last4]
+        = "************" + @card[:last4]
         %br
         = @card[:exp_month]
         \/
