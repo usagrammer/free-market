@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   before_action :set_item, only: [:show, :edit, :update, :destroy, :purchase_confirmation, :purchase]
   before_action :user_is_not_seller, only: [:edit, :update, :destroy]
+  before_action :user_is_seller, only: [:purchase_confirmation, :purchase]
 
   def new
     @item = Item.new
@@ -91,6 +92,9 @@ class ItemsController < ApplicationController
     redirect_to root_path, alert: "あなたは出品者ではありません" unless @item.seller_id == current_user.id
   end
 
+  def user_is_seller
+    redirect_to root_path, alert: "自分で出品した商品は購入できません" if @item.seller_id == current_user.id
+  end
   end
 
 end
