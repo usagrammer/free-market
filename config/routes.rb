@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :new, :create, :show, :edit, :update, :destroy]  do
     member do
       get "purchase_confirmation"
+      post "purchase"
     end
     collection do
       get 'search'
