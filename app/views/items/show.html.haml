@@ -23,9 +23,9 @@
           %th.item-data__row--title
             カテゴリ
           %td.item-data__row--value
-            = link_to "hoge", ""
+            = link_to "#{@item.category.root.name}", ""
             %br
-            = link_to ">hoge", ""
+            = link_to ">#{@item.category.parent.name}", ""
             %br
             = link_to ">#{@item.category.name}", ""
         %tr.item-data__row
