@@ -30,11 +30,11 @@
   .block__menu-left
     配送先
   .block__main
-    〒512-0034
+    〒#{current_user.address&.postal_code}
     %br
-    hoge府 fuga市bar町 12-34
+    #{current_user.address&.city} #{current_user.address&.house_number}
     %br
-    hoge田 fuga太郎
+    #{current_user.last_name} #{current_user.first_name}
   .block__menu-right
     = link_to "" do
       変更する >
