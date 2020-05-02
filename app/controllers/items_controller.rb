@@ -54,6 +54,18 @@ class ItemsController < ApplicationController
     render layout: 'no_menu' # レイアウトファイル指定
   end
 
+  def purchase
+    Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
+    customer_token = current_user.card.customer_token
+    Payjp::Charge.create(
+      amount: @item.price, # 商品の値段
+      customer: customer_token, # 顧客、もしくはカードのトークン
+      currency: 'jpy'  # 通貨の種類
+    )
+    @item.update(deal: "売り切れ")
+    redirect_to item_path(@item), notice: "商品を購入しました"
+  end
+
   private
   def item_params
     params.require(:item).permit(
