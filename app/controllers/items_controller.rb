@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   before_action :set_item, only: [:edit, :update, :destroy]
-  before_action :move_to_index, only: [:edit, :update, :destroy], unless: :seller?
+  before_action :user_is_not_seller, only: [:edit, :update, :destroy]
 
   def new
     @item = Item.new
@@ -87,12 +87,10 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def move_to_index
-    redirect_to root_path, alert: "エラーが発生しました。"
+  def user_is_not_seller
+    redirect_to root_path, alert: "あなたは出品者ではありません" unless @item.seller_id == current_user.id
   end
 
-  def seller?
-    return @item.seller_id == current_user.id
   end
 
 end
