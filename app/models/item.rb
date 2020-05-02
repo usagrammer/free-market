@@ -2,7 +2,7 @@ class Item < ApplicationRecord
 
   validates :name, :price, :detail, :condition, :delivery_fee_payer, :delivery_method, :prefecture_id, :delivery_days, :deal, presence: true
   validates :price, numericality:{greater_than_or_equal_to: 300,less_than_or_equal_to: 9999999}
-  validate :images_range
+  validates :images, length: { minimum: 1, maximum: 5, message: "の数が不正です" }
 
   belongs_to :category
   belongs_to :seller, class_name: "User"
@@ -49,18 +49,11 @@ class Item < ApplicationRecord
     "販売中": 0,
     "売り切れ": 1
     }
-
+  
   scope :new_items, -> { order("created_at DESC").limit(4) }
 
   def self.search_by_categories(category_ids)
     return Item.where(category_id: category_ids).includes(:images)
-  end
-
-    private
-
-  def images_range
-    errors.add(:images, "を1枚以上選択してください") if images.size < 1
-    errors.add(:images, "は10枚までです") if images.size > 5
   end
 
 end
