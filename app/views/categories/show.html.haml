@@ -3,3 +3,4 @@
     #{@category.name}の商品一覧
   .items-wrapper__items
     = render @items
+  = paginate(@items)
