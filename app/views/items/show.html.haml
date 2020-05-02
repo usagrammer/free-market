@@ -63,8 +63,9 @@
     = link_to "" do
       .button.back-red
         購入画面に進む
-    = link_to edit_item_path(@item) do
-      .button.back-gray
-        商品を編集する
+    - if @item.seller == current_user
+      = link_to edit_item_path(@item) do
+        .button.back-gray
+          商品を編集する
     .item-show__detail
       = @item.detail
