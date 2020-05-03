@@ -1,7 +1,9 @@
 class ItemsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_index, only: [:edit, :update, :destroy], unless: :seller?
+  skip_before_action :authenticate_user!, only: [:index]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :purchase_confirmation, :purchase]
+  before_action :user_is_not_seller, only: [:edit, :update, :destroy]
+  before_action :user_is_seller, only: [:purchase_confirmation, :purchase]
+  before_action :sold_item, only: [:edit, :update, :destroy, :purchase_confirmation, :purchase]
 
   def index
     ladies_category = Category.find_by(name: "レディース")
@@ -62,7 +64,21 @@ class ItemsController < ApplicationController
   end
 
   def purchase_confirmation
+    @card = Card.get_card(current_user.card.customer_token) if current_user.card
     render layout: 'no_menu' # レイアウトファイル指定
+  end
+
+  def purchase
+    redirect_to cards_path, alert: "クレジットカードを登録してください" and return unless current_user.card.present?
+    Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
+    customer_token = current_user.card.customer_token
+    Payjp::Charge.create(
+      amount: @item.price, # 商品の値段
+      customer: customer_token, # 顧客、もしくはカードのトークン
+      currency: 'jpy'  # 通貨の種類
+    )
+    @item.update(deal: "売り切れ")
+    redirect_to item_path(@item), notice: "商品を購入しました"
   end
 
   private
@@ -85,12 +101,16 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def move_to_index
-    redirect_to root_path, alert: "エラーが発生しました。"
+  def user_is_not_seller
+    redirect_to root_path, alert: "あなたは出品者ではありません" unless @item.seller_id == current_user.id
   end
 
-  def seller?
-    return @item.seller_id == current_user.id
+  def user_is_seller
+    redirect_to root_path, alert: "自分で出品した商品は購入できません" if @item.seller_id == current_user.id
+  end
+
+  def sold_item
+    redirect_to root_path, alert: "売り切れです" if @item.deal != "販売中"
   end
 
 end

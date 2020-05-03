@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
-  before_action :redirect_registered_user, except: [:show, :destroy]
+  before_action :redirect_registered_user, except: [:index, :destroy]
 
-  def show
+  def index
     @card = Card.get_card(current_user.card.customer_token) if current_user.card
   end
 
@@ -14,7 +14,7 @@ class CardsController < ApplicationController
     customer = Payjp::Customer.create(card: params[:payjp_token]) ## 顧客の作成
     card = current_user.build_card(card_token: params[:card_token], customer_token: customer.id)
     if card.save
-      redirect_to card_path(current_user), notice: "カードの登録が完了しました。"
+      redirect_to cards_path, notice: "カードの登録が完了しました。"
     else
       redirect_to new_card_path, alert: "カードの登録に失敗しました。"
     end
@@ -25,9 +25,9 @@ class CardsController < ApplicationController
     card = current_user.card
 
     if card.destroy
-      redirect_to card_path(current_user), notice: "カードの削除が完了しました。"
+      redirect_to cards_path, notice: "カードの削除が完了しました。"
     else
-      redirect_to card_path(current_user), notice: "カードの削除に失敗しました。"
+      redirect_to cards_path, notice: "カードの削除に失敗しました。"
     end
 
   end
@@ -35,7 +35,7 @@ class CardsController < ApplicationController
   private
 
   def redirect_registered_user
-    redirect_to card_path(current_user), alert: "既にカードを登録済みです。" if current_user.card
+    redirect_to cards_path, alert: "既にカードを登録済みです。" if current_user.card
   end
 
 end

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :new, :create, :show, :edit, :update, :destroy]  do
     member do
       get "purchase_confirmation"
+      post "purchase"
     end
     collection do
       get 'search'
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories, only: [:index, :show]
-  resources :cards, only: [:new, :show, :create, :destroy]
+  resources :cards, only: [:index, :new, :create, :destroy]
 
   namespace :api do
     resources :categories, only: :index, defaults: { format: 'json' }

@@ -5,12 +5,12 @@
   .block__main
     .item-purchase-confirmation
       .item-purchase-confirmation__image-and-name
-        = image_tag ""
+        = image_tag @item.images.first.src.url
         .item-purchase-confirmation__image-and-name--name
-          商品名hoge
+          = @item.name
       .item-purchase-confirmation__price
         .item-purchase-confirmation__price--yen
-          ¥1000
+          ¥#{@item.price}
         .item-purchase-confirmation__price--fee
           \(税込み)
     .button.back-gray
@@ -19,22 +19,22 @@
       #amount__left
         支払金額
       #amount__right
-        ¥1000
+        ¥#{@item.price}
     - unless @card
       .font-red
         配送先と支払い方法の入力を完了してください。
-    = link_to "", method: :post do
+    = link_to purchase_item_path(@item), method: :post do
       .button{class: "#{'back-red' if @card}" }
         購入する
 .block.horizontal-padding-25
   .block__menu-left
     配送先
   .block__main
-    〒512-0034
+    〒#{current_user.address&.postal_code}
     %br
-    hoge府 fuga市bar町 12-34
+    #{current_user.address&.city} #{current_user.address&.house_number}
     %br
-    hoge田 fuga太郎
+    #{current_user.last_name} #{current_user.first_name}
   .block__menu-right
     = link_to "" do
       変更する >
@@ -44,7 +44,7 @@
   .block__main
     #card-data
       - if @card
-        = @card[:last4]
+        = "************" + @card[:last4]
         %br
         = @card[:exp_month]
         \/
@@ -54,5 +54,5 @@
       - else
         \/
   .block__menu-right
-    = link_to "", data: {turbolinks: false} do
+    = link_to cards_path, data: {turbolinks: false} do
       変更する >
