@@ -2,23 +2,24 @@
   .parent-categories__title
     カテゴリー一覧
   -# 大カテゴリをeachで回す
-  - ['hoge'].each do |category|
+  - Category.roots.each do |category|  ## Category.roots（親カテゴリ全て）をeachで回す
     %span.parent-categories__category
-      = link_to "" do
-        大カテゴリ名
+      = link_to category_path(category) do
+        = category.name  ## categoryに親カテゴリが入っている
 -# 大カテゴリをeachで回す
-- ['hoge'].each do |parent_category|
+- Category.roots.each do |parent_category| ## Category.roots（親カテゴリ全て）をeachで回す
   .categories.horizontal-padding-25
     .parent-category
-      = link_to "" do
-        大カテゴリ名
+      = link_to category_path(parent_category) do
+        = parent_category.name  ## parent_categoryに親カテゴリが入っている
     -# 中カテゴリをeachで回す
-    - ['hoge'].each do |child_category|
+    - parent_category.children.each do |child_category| ## 親カテゴリ.children（子カテゴリ全て）をeachで回す
       .child-category
-        中カテゴリ名
+        = child_category.name  ## child_categoryに子カテゴリが入っている
         .child-category__grand-child-categories
-          = link_to "", class: "child-category__grand-child-categories--category" do
+          = link_to category_path(child_category), class: "child-category__grand-child-categories--category" do
             すべて
           -# 小カテゴリをeachで回す
-          - ['hoge'].each do |grandchild_category|
-            = link_to "小カテゴリ名", "", class: "child-category__grand-child-categories--category"
+          - child_category.children.each do |grandchild_category| ## 子カテゴリ.children（孫カテゴリ全て）をeachで回す
+            = link_to category_path(grandchild_category), class: "child-category__grand-child-categories--category" do
+              = grandchild_category.name  ## grandchild_categoryに孫カテゴリが入っている

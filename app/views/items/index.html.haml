@@ -20,19 +20,19 @@
 .pickups-header
   人気のカテゴリー
   .pickups-header__category-names
-    - @category_ranking&.each do |category|
-      = link_to "" do
+    - @new_items_arrays.each do |new_items|
+      = link_to category_path(new_items[:category]) do
         .pickups-header__category-names--category-name
-          = category.name
+          = new_items[:category].name
 .pickups.horizontal-padding-15
   %br
-  - @sorted_items&.each do |items|
+  - @new_items_arrays.each do |new_items|
     .pickup
       %span.pickup__name
-        = items[0].category.root.name
+        = new_items[:category].name
         新着アイテム
-      = link_to "" do
+      = link_to category_path(new_items[:category]) do
         %span.pickup__display-all
           もっと見る >
-      .pickup__items{class: "#{'auto-slick' if items.length >= 4}"}
-        = render items
+      .pickup__items
+        = render new_items[:items]
