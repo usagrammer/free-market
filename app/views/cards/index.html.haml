@@ -20,7 +20,7 @@
               = @card[:exp_year]
               %br
               = @card[:brand]
-            = link_to "削除する", card_path(current_user), method: :delete, class: "delete-button"
+            = link_to "削除する", card_path(current_user.card), method: :delete, class: "delete-button"
       - else
         .block__main.horizontal-padding-25
           = link_to new_card_path, data: {turbolinks: false} do

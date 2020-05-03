@@ -25,7 +25,7 @@
     = render partial: 'shared/side_bar_list', locals: {text: "プロフィール", path: "", method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "住所変更", path: "", method: ""}
     -# 購入機能を実装時、cards#showへのリンクを貼る
-    = render partial: 'shared/side_bar_list', locals: {text: "支払い方法", path: card_path(current_user), method: ""}
+    = render partial: 'shared/side_bar_list', locals: {text: "支払い方法", path: cards_path, method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "メール/パスワード", path: "", method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "本人情報", path: "", method: ""}
     = render partial: 'shared/side_bar_list', locals: {text: "電話番号の確認", path: "", method: ""}

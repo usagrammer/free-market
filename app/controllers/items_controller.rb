@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
   end
 
   def purchase
-    redirect_to card_path(current_user), alert: "クレジットカードを登録してください" and return unless current_user.card.present?
+    redirect_to cards_path, alert: "クレジットカードを登録してください" and return unless current_user.card.present?
     Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
     customer_token = current_user.card.customer_token
     Payjp::Charge.create(
