@@ -1,13 +1,14 @@
-= link_to "", data:{turbolinks: false}  do
+= link_to item_path(item), data:{turbolinks: false}  do
   .item
-    = render partial: 'shared/sold_out'
+    - if item.deal != "販売中"
+      = render partial: 'shared/sold_out'
     .item-top
-      = image_tag "", class: "item-top__image"
+      = image_tag item.images.first&.src&.url, class: "item-top__image"
       .item-top__price
-        ¥1000
+        ¥#{item.price}
     .item-bottom
       .item-bottom__name
-        商品名hoge
+        = item.name
       .item-bottom-price-good
         .item-bottom-price-good__price
         = icon "fas", "heart", class:"item-bottom-price-good__good"
