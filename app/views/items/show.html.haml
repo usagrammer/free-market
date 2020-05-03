@@ -23,7 +23,7 @@
           %th.item-data__row--title
             カテゴリ
           %td.item-data__row--value
-            = link_to "#{@item.category.root.name}", category_path(@item.category.root)
+            = link_to @item.category.root.name, category_path(@item.category.root)
             %br
             = link_to ">#{@item.category.parent.name}", category_path(@item.category.parent)
             %br
