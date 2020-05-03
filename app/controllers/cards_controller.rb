@@ -16,7 +16,7 @@ class CardsController < ApplicationController
     if card.save
       redirect_to cards_path, notice: "カードの登録が完了しました。"
     else
-      redirect_to new_cards_path, alert: "カードの登録に失敗しました。"
+      redirect_to new_card_path, alert: "カードの登録に失敗しました。"
     end
 
   end
