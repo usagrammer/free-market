@@ -1,5 +1,6 @@
 .items-wrapper.horizontal-padding-20
   .items-wrapper__title
-    レディースの商品一覧
+    #{@category.name}の商品一覧
   .items-wrapper__items
-    = render partial: 'items/item'
+    = render @items
+  = paginate(@items)

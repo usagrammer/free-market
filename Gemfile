@@ -85,4 +85,6 @@ gem 'active_hash'
 
 gem 'ancestry'
 
+gem 'kaminari'
+
 gem 'payjp'

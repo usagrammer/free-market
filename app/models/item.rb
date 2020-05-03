@@ -49,6 +49,12 @@ class Item < ApplicationRecord
     "販売中": 0,
     "売り切れ": 1
     }
+  
+  scope :new_items, -> { order("created_at DESC").limit(4) }
+
+  def self.search_by_categories(category_ids)
+    return Item.where(category_id: category_ids).includes(:images)
+  end
 
   scope :new_items, -> { order("created_at DESC").limit(4) }
 
