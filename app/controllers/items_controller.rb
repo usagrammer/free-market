@@ -4,9 +4,9 @@ class ItemsController < ApplicationController
   before_action :move_to_index, only: [:edit, :update, :destroy], unless: :seller?
 
   def index
-    ladies_category = Category.find(1)
-    mens_category = Category.find(200)
-    kids_category = Category.find(345)
+    ladies_category = Category.find_by(name: "レディース")
+    mens_category = Category.find_by(name: "メンズ")
+    kids_category = Category.find_by(name: "ベビー・キッズ")
 
     ladies_items = Item.search_by_categories(ladies_category.subtree_ids).new_items
     mens_items = Item.search_by_categories(mens_category.subtree_ids).new_items
