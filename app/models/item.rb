@@ -56,4 +56,10 @@ class Item < ApplicationRecord
     return Item.where(category_id: category_ids).includes(:images)
   end
 
+  scope :new_items, -> { order("created_at DESC").limit(4) }
+
+  def self.search_by_categories(categories)
+    return Item.where(category: categories).includes(:images)
+  end
+
 end
