@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   prepend_before_action :check_recaptcha, only: [:create]
-  before_action :session_has_not_user, only: [:confirm_phone, :new_address, :create_address, :completed]
+  before_action :session_has_not_user, only: [:confirm_phone, :new_address, :create_address, :create_address]
   layout 'no_menu'
 
   # GET /resource/sign_up
@@ -83,7 +83,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @address = Address.new
   end
 
-  def completed
+  def create_address
     @address = Address.new(address_params)
     if @address.invalid? ## バリデーションに引っかかる（save不可な）時
       redirect_to users_new_address_path, alert: @address.errors.full_messages
