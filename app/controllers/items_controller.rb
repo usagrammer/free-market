@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy, :purchase_confirmation, :purchase]
   before_action :user_is_not_seller, only: [:edit, :update, :destroy]
   before_action :user_is_seller, only: [:purchase_confirmation, :purchase]
@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
        {category: kids_category, items: kids_items}
       ]
   end
-  
+
   def show
 
   end
