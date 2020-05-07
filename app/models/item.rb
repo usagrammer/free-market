@@ -2,13 +2,10 @@ class Item < ApplicationRecord
 
   validates :name, :price, :detail, :condition, :delivery_fee_payer, :delivery_method, :prefecture_id, :delivery_days, :deal, presence: true
   validates :price, numericality:{greater_than_or_equal_to: 300,less_than_or_equal_to: 9999999}
-  validates :images, length: { minimum: 1, maximum: 5, message: "の数が不正です" }
 
   belongs_to :category
   belongs_to :seller, class_name: "User"
   belongs_to :buyer, class_name: "User", optional: true
-  has_many :images, dependent: :destroy
-  accepts_nested_attributes_for :images, allow_destroy: true, update_only: true
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
@@ -49,7 +46,7 @@ class Item < ApplicationRecord
     "販売中": 0,
     "売り切れ": 1
     }
-  
+
   scope :new_items, -> { order("created_at DESC").limit(4) }
 
   def self.search_by_categories(category_ids)
@@ -59,7 +56,7 @@ class Item < ApplicationRecord
   scope :new_items, -> { order("created_at DESC").limit(4) }
 
   def self.search_by_categories(categories)
-    return Item.where(category: categories).includes(:images)
+    return Item.where(category: categories)
   end
 
 end
