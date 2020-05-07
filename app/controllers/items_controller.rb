@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
        {category: mens_category, items: mens_items},
        {category: kids_category, items: kids_items}
       ]
+    @new_items_arrays = []
   end
 
   def show
@@ -27,7 +28,6 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @item.images.build
     render layout: 'no_menu' # レイアウトファイルを指定
   end
 
@@ -42,7 +42,6 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    @item.images.build
     render layout: 'no_menu'  # レイアウトファイル指定
   end
 
@@ -92,8 +91,7 @@ class ItemsController < ApplicationController
       :delivery_method,
       :delivery_days,
       :prefecture_id,
-      :category_id,
-      images_attributes: [:src, :id, :_destroy]
+      :category_id
       ).merge(seller_id: current_user.id)
   end
 
