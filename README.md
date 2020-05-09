@@ -1,6 +1,6 @@
 # README
 
-# 起動をするためにまずやること
+# ◆起動をするためにまずやること
 
 ## ●ruby2.6.5を導入したくない人向け
 
@@ -26,6 +26,15 @@ rbenv install 2.6.5
 ## 実行場所:free-market_sample
 
 rbenv global 2.6.5
+```
+
+## ●bundle install
+
+rubyの準備ができたらbundle installを行ってください。
+
+```
+## 実行場所:free-market_sample
+bundle install
 ```
 
 ## ●mysql5.7を導入したくない人向け
@@ -176,7 +185,6 @@ bundle installやrails db:createに加えてrails db:seedも行ってくださ�
 ```
 ## 実行場所:free-market_sample
 
-bundle install
 rails db:create
 rails db:migrate
 rails db:seed
