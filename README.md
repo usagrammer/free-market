@@ -121,7 +121,7 @@ mysql.server restart
 rm -rf ~/Library/LaunchAgents
 mkdir ~/Library/LaunchAgents
 ln -sfv /usr/local/opt/mysql\@5.7/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql\@5.7.plist 
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql\@5.7.plist
 ```
 
 最後にmysql2のgemを入れ直しておきましょう。
@@ -156,26 +156,26 @@ EDITOR="vi" rails credentials:edit
 
 ```
 aws:
-  access_key_id: AKIA*************
-  secret_access_key: *************
+  access_key_id: AKIAhogehogefugafuga
+  secret_access_key: hogehogefugafuga
 
 basic:
-  user_name: "****"
-  password: "****"
+  user_name: "hoge"
+  password: "fuga"
 
 recaptcha:
-  site_key: *************
-  secret_key: *************
+  site_key: hogehogefugafuga
+  secret_key: hogehogefugafuga
 
 google:
-  client_id: *************.apps.googleusercontent.com
-  client_secret: *************
- 
-payjp:
-  public_key: pk_test_*************
-  secret_key: sk_test_*************
+  client_id: hogehogefugafuga.apps.googleusercontent.com
+  client_secret: hogehogefugafuga
 
-database_password: *************
+payjp:
+  public_key: pk_test_hogehogefugafuga
+  secret_key: sk_test_hogehogefugafuga
+
+database_password: hogefuga
 ```
 
 ## ●rails sの起動
