@@ -185,6 +185,9 @@ bundle installやrails db:createに加えてrails db:seedも行ってくださ�
 ```
 ## 実行場所:free-market_sample
 
+brew install yarn
+yarn add jquery
+yarn install --check-files
 rails db:create
 rails db:migrate
 rails db:seed
