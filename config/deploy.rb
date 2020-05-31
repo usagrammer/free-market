@@ -1,5 +1,5 @@
 # capistranoのバージョンを記載。固定のバージョンを利用し続け、バージョン変更によるトラブルを防止する
-lock '3.12.1'
+lock '3.14.0'
 
 # Capistranoのログの表示に利用する
 set :application, 'free-market'
