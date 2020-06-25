@@ -12,10 +12,11 @@
         最大5枚までアップロードできます。
         #selected-item-images
           -# 商品編集の際はプレビューを表示
-          - @item.images.each_with_index do |image, i|
+          -# -binding.pry
+          - @item.item_images.each_with_index do |image, i|
             -if image.persisted?
-              .item-image{data: {index: i}}
-                = image_tag image.src.url, class: "item-image__image"
+              .item-image{data: {index: i, storage_id: i}}
+                = image_tag image, class: "item-image__image"
                 .item-image__buttons
                   .item-image__buttons--edit
                     編集
@@ -25,10 +26,11 @@
             #select-image-button__text
               クリックしてファイルをアップロード
     #image-file-fields
-      = f.fields_for :images do |image|
-        = image.file_field :src, accept: "image/*", class: "new-item-image", data: {index: image.index}
-        - if image.object.persisted?
-          = image.check_box :_destroy, include_hidden: false
+      = f.file_field :item_images, class: "new-item-image", multiple: true, direct_upload: true
+      -# = f.fields_for :images do |image|
+      -#   = image.file_field :src, accept: "image/*", class: "new-item-image", data: {index: image.index}
+      -#   - if image.object.persisted?
+      -#     = image.check_box :_destroy, include_hidden: false
     .error-field{data:{column_name: "item_images"}}
   .block.horizontal-padding-5
     .input-field

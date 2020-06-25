@@ -1,5 +1,5 @@
 document.addEventListener("turbolinks:load", function () {
-
+  return false;
   if (!$("#item_form")[0]) return false; //商品出品・編集ページではないなら以降実行しない。
 
   function buildImagePreview(blob_url, index) {

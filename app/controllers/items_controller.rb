@@ -33,6 +33,11 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+
+    params[:item][:item_images].each_with_index do |image|
+      @item.item_images.attach(image)
+    end
+
     if @item.save
       redirect_to root_path, notice: "出品に成功しました"
     else
@@ -49,6 +54,15 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
+
+      params[:delete_image_storage_ids]&.each do |id|
+        @item.item_images[id.to_i].purge
+      end
+
+      params[:changed_images].each do |image|
+        @item.item_images.attach(image)
+      end
+
       redirect_to root_path, notice: "出品に成功しました"
     else
       redirect_to edit_item_path(@item), alert: @item.errors.full_messages  ## ここを変更

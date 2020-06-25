@@ -3,7 +3,8 @@
     - if item.deal != "販売中"
       = render partial: 'shared/sold_out'
     .item-top
-      = image_tag item.images.first&.src&.url, class: "item-top__image"
+      -# = image_tag item.images.first&.src&.url, class: "item-top__image"
+      = image_tag item.item_images.first, class: "item-top__image"
       .item-top__price
         ¥#{item.price}
     .item-bottom
