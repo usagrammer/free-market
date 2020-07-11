@@ -9,5 +9,21 @@ FactoryBot.define do
     last_name_reading { Gimei.last.katakana }
     birthday { Faker::Date.birthday}
     association :address
+
+    trait :with_selling_items do
+      transient do
+        selling_item_length { 1 }  ## 引数のイメージ（evaluator.item_lengthで使える）
+      end
+      after(:build) { |user, evaluator| user.selling_items << build_list(:item, evaluator.selling_item_length)}
+    end
+
+    trait :with_bought_items do
+      transient do
+        bought_item_length { 1 }  ## 引数のイメージ（evaluator.item_lengthで使える）
+      end
+      after(:build) { |user, evaluator| user.bought_items << build_list(:item, evaluator.bought_item_length)}
+    end
+
   end
+
 end

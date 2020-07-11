@@ -9,8 +9,9 @@ RSpec.describe User, type: :model do
     let(:user) {FactoryBot.build(:user)}
 
       it "全て正しく入力されている" do
+        binding.pry
         expect(user).to be_valid
-        puts user.attributes
+        # puts user.attributes
       end
 
     end
@@ -20,11 +21,14 @@ RSpec.describe User, type: :model do
       let(:user) {FactoryBot.build(:user)}
       let(:user2) {FactoryBot.build(:user, email: user.email)}
 
+      after(:example) do
+        puts "ーーーーーーーーーーーーー"
+        puts user.errors.full_messages
+        puts user.attributes
+        puts "ーーーーーーーーーーーーー"
+      end
+
       def invalid_details(data)  ## エラーが出る時の情報
-        puts "ーーーーーーーーーーーーー"
-        puts data.errors.full_messages
-        puts data.attributes
-        puts "ーーーーーーーーーーーーー"
       end
 
       it "emailがない" do

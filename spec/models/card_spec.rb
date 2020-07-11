@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Address, type: :model do
+RSpec.describe Card, type: :model do
 
   describe "登録" do
 
