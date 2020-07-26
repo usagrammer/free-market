@@ -70,3 +70,17 @@
           商品を編集する
     .item-show__detail
       = @item.detail
+    .block
+      .item-comments
+        = render partial: "items/item_comment", collection: @item.item_comments
+      - if user_signed_in?
+        = form_with(model: [@item, @item_comment], local: true, id: "item-comment-form") do |f|
+          .input-field
+            .input-field-main
+              = f.label :detail, "商品へのコメント"
+              %span.required-true
+                必須
+              %br
+              = f.text_area :content, required: false, placeholder: "6文字以上", rows: 5
+              .error-field{data:{column_name: "detail"}}
+              = f.submit "コメントする", class:"button back-gray font-white"
