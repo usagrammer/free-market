@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :buyer, class_name: "User", optional: true
   has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true, update_only: true
+  has_many :item_comments, dependent: :destroy
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
@@ -49,7 +50,7 @@ class Item < ApplicationRecord
     "販売中": 0,
     "売り切れ": 1
     }
-  
+
   scope :new_items, -> { order("created_at DESC").limit(4) }
 
   def self.search_by_categories(category_ids)

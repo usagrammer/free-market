@@ -1,0 +1,11 @@
+.item-comments-comment
+  .item-comments-comment__user
+    = image_tag "user_noimage.png", class: "item-comments-comment__user--avatar"
+    .item-comments-comment__user--name
+      = item_comment.user.nickname
+  .item-comments-comment__content
+    = item_comment.content
+    %br
+    .item-comments-comment__content--time
+      = icon "fas", "clock"
+      = time_ago_in_words(item_comment.created_at) + "前"
