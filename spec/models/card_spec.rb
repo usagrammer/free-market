@@ -14,7 +14,7 @@ RSpec.describe Card, type: :model do
 
       let(:user) { FactoryBot.create(:user) }
       let(:card_token) { FactoryBot.create(:card_token, user: user ) }
-      let(:dummy_card) {DummyData::PayjpCard.data}
+      let(:dummy_card) { DummyData::PayjpCard.data }
       let(:payjp_customer_mock) { double("Payjp::Customer")}
       let(:payjp_cards) { [ DummyData::PayjpCard.data ] }
 
@@ -36,6 +36,13 @@ RSpec.describe Card, type: :model do
         allow(payjp_customer_mock).to receive(:cards).and_return(payjp_cards)
 
         card = Card.get_card(card_token.customer_token)
+        ## card => {
+        #   "id": "car_60ebbd5f4a1908b689fe0151f2b2",
+        #   〜略〜
+        #   "exp_month": 9,
+        #   "exp_year": 2024,
+        #   "last4": "4242",
+        # }
         expect(card).to eq dummy_card
       end
 
