@@ -1,5 +1,3 @@
-require 'json'
-
 module DummyData
 
   class PayjpCard
