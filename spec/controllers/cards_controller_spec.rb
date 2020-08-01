@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe CardsController, type: :controller do
 
   let(:user) { FactoryBot.create(:user) }
-  # let(:card_token) { FactoryBot.create(:card_token, user: user ) }
-  let(:dummy_card) {DummyData::PayjpCard.data}
+  let(:dummy_card) { DummyData::PayjpCard.data }
+  let(:card_token) { FactoryBot.build(:card_token, card_token: dummy_card[:id], customer_token: dummy_card[:customer], user: nil) }
 
   context 'log in' do
 
@@ -12,7 +12,7 @@ RSpec.describe CardsController, type: :controller do
       login user
 
       payjp_customer_mock = double("Payjp::Customer")
-      payjp_cards = [DummyData::PayjpCard.data]
+      payjp_cards = [ dummy_card ]
       allow(Payjp::Customer).to receive(:retrieve).and_return(payjp_customer_mock)
       allow(payjp_customer_mock).to receive(:cards).and_return(payjp_cards)
 
@@ -21,9 +21,10 @@ RSpec.describe CardsController, type: :controller do
     end
 
     it '#index' do
-      @card_token = FactoryBot.create(:card_token, user: user )
+      card_token.user = user
+      card_token.save
       get :index
-      expect(assigns(:card)[:customer_id]).to eq(dummy_card[:customer_id])
+      expect(assigns(:card)[:customer]).to eq(dummy_card[:customer])
     end
 
     it '#create' do
