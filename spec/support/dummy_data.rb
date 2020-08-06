@@ -48,7 +48,10 @@ module DummyData
             "email"=>"hoge.fuga@bar.co.jp",
             "email_verified"=>true,
             "locale"=>"ja",
-            "hd"=>"bar.co.jp"}}}
+            "hd"=>"bar.co.jp"
+           }
+         }
+       }
     end
 
   end

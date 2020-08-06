@@ -84,7 +84,7 @@ RSpec.describe User, type: :model do
 
     context "クラスメソッドのテスト" do
 
-      let(:dummy_google_user) { OmniAuth::AuthHash.new(DummyData::GoogleUser.data) }
+      let(:dummy_google_user) { OmniAuth.config.mock_auth[:google_oauth2] }
       let(:sns_credential) { FactoryBot.create(:sns_credential)}
 
       it "self.from_omniauth(auth_data) モックなし" do

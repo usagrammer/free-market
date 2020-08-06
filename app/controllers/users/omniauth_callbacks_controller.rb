@@ -3,6 +3,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_for(:google)
   end
 
+  def facebook
+    callback_for(:facebook)
+  end
+
   def callback_for(provider)
     session["devise.sns_auth"] = User.from_omniauth(request.env["omniauth.auth"])
 

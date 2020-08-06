@@ -10,7 +10,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
     before do
       request.env["devise.mapping"] = Devise.mappings[:user]
-      request.env["omniauth.auth"] = OmniAuth::AuthHash.new(DummyData::GoogleUser.data)
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
     end
 
     it '#index' do
