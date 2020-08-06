@@ -27,7 +27,7 @@ class ApplicationRecord < ActiveRecord::Base
     else
       puts "バリデーションエラー発生"
       puts self.errors.messages
-      binding.pry
+      # binding.pry
     end
     puts "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"
     puts "==========================="

@@ -9,7 +9,6 @@ RSpec.describe User, type: :model do
     let(:user) {FactoryBot.build(:user)}
 
       it "全て正しく入力されている" do
-        binding.pry
         expect(user).to be_valid
         # puts user.attributes
       end
@@ -79,6 +78,31 @@ RSpec.describe User, type: :model do
         user.last_name_reading = "かきくけこ"
         expect(user).to_not be_valid
         invalid_details(user)
+      end
+
+    end
+
+    context "クラスメソッドのテスト" do
+
+      let(:dummy_google_user) { OmniAuth::AuthHash.new(DummyData::GoogleUser.data) }
+      let(:sns_credential) { FactoryBot.create(:sns_credential)}
+
+      it "self.from_omniauth(auth_data) モックなし" do
+        session_devise_sns_auth = User.from_omniauth(dummy_google_user)
+        expect(session_devise_sns_auth[:user].email).to eq dummy_google_user.info.email
+        expect(session_devise_sns_auth[:sns_credential].uid).to eq dummy_google_user.uid
+      end
+
+      it "self.from_omniauth(auth_data) モック使用" do
+        allow(User).to receive(:from_omniauth).and_return(
+          {
+            user: sns_credential.user,
+            sns_credential: sns_credential
+          }
+        )
+        session_devise_sns_auth = User.from_omniauth("hoge")
+        expect(session_devise_sns_auth[:user].email).to eq sns_credential.user.email
+        expect(session_devise_sns_auth[:sns_credential].uid).to eq sns_credential.uid
       end
 
     end

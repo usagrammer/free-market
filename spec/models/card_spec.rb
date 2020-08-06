@@ -1,14 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
-
   describe "登録" do
-
-    context "登録に成功する" do
-    end
-
-    context "登録に失敗する" do
-    end
 
     context "クラスメソッドのテスト" do
 
@@ -44,10 +37,10 @@ RSpec.describe Card, type: :model do
         #   "last4": "4242",
         # }
         expect(card).to eq dummy_card
-      end
+      end  ## /it "self.get_cardメソッドの返り値であるcardがdummy_cardと一致する"
 
-    end
+    end  ## /context "クラスメソッドのテスト"
 
-  end
+  end  ## /describe "登録" do
 
 end
