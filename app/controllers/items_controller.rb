@@ -72,11 +72,12 @@ class ItemsController < ApplicationController
     redirect_to cards_path, alert: "クレジットカードを登録してください" and return unless current_user.card.present?
     Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
     customer_token = current_user.card.customer_token
-    Payjp::Charge.create(
+    hoge = Payjp::Charge.create(
       amount: @item.price, # 商品の値段
       customer: customer_token, # 顧客、もしくはカードのトークン
       currency: 'jpy'  # 通貨の種類
     )
+    binding.pry
     @item.update(deal: "売り切れ")
     redirect_to item_path(@item), notice: "商品を購入しました"
   end

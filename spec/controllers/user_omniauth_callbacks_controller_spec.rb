@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
   let(:dummy_google_user) { OmniAuth::AuthHash.new(DummyData::GoogleUser.data) }
-  let(:sns_credential) { FactoryBot.create(:sns_credential)}
+  let(:sns_credential) { FactoryBot.build(:sns_credential)}
   let(:user) { sns_credential.user }
 
   context 'log in' do

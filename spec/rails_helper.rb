@@ -1,6 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
-require 'capybara/rspec'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
@@ -34,9 +33,17 @@ end
 
 I18n.locale = "en"
 
+## 結合テストを実装する場合必要
+require 'capybara/rspec'
+
+## 「spec/support」にモジュールを追加する場合（deviseの導入やモックを使ったテストのダミーデータ等）に必要
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
+  ## deviseの導入に必要
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  ## deviseの導入に必要
+  config.include ControllerMacros, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerMacros, type: :controller
 

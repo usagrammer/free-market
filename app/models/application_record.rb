@@ -5,7 +5,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   private
   def display_validation_result
-
+return false
     ## testのときはオフ
     # return false if Rails.env.test?
 

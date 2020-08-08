@@ -12,12 +12,12 @@ RSpec.describe CardsController, type: :controller do
       login user
 
       payjp_customer_mock = double("Payjp::Customer")
-      payjp_cards = [ dummy_card ]
+      dummy_payjp_cards = [ dummy_card ]
       allow(Payjp::Customer).to receive(:retrieve).and_return(payjp_customer_mock)
-      allow(payjp_customer_mock).to receive(:cards).and_return(payjp_cards)
+      allow(payjp_customer_mock).to receive(:cards).and_return(dummy_payjp_cards)
 
       allow(Payjp::Customer).to receive(:create).and_return(payjp_customer_mock)
-      allow(payjp_customer_mock).to receive(:id).and_return(payjp_cards.first[:customer])
+      allow(payjp_customer_mock).to receive(:id).and_return(dummy_payjp_cards.first[:customer])
     end
 
     it '#index' do

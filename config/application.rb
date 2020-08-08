@@ -20,6 +20,10 @@ module FreeMarket
         routing_specs: false,
         request_specs: false
     end
+    puts "ーーーーーーーーー"
+    puts Dir[Rails.root.join('lib')]
+    puts Dir.pwd
+    puts "ーーーーーーーーー"
     config.load_defaults 6.0
     config.i18n.default_locale = :ja ## 追加
     config.time_zone = 'Tokyo' ## 追加
