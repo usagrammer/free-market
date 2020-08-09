@@ -8,13 +8,13 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     %script{src: "https://js.pay.jp/", type: "text/javascript"}
-%body
-  = render 'shared/flash'
-  = render 'shared/header'
-  = yield
-  = link_to new_item_path, data:{turbolinks: false} do
-    .sell-button
-      .sell-button__text
-        出品
-      = icon "fas", "camera", class:"sell-button__icon"
-  = render 'shared/footer'
+  %body
+    = render 'shared/flash'
+    = render 'shared/header'
+    = yield
+    = link_to new_item_path, data:{turbolinks: false} do
+      .sell-button
+        .sell-button__text
+          出品
+        = icon "fas", "camera", class:"sell-button__icon"
+    = render 'shared/footer'

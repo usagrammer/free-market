@@ -77,7 +77,6 @@ class ItemsController < ApplicationController
       customer: customer_token, # 顧客、もしくはカードのトークン
       currency: 'jpy'  # 通貨の種類
     )
-    binding.pry
     @item.update(deal: "売り切れ")
     redirect_to item_path(@item), notice: "商品を購入しました"
   end

@@ -1,7 +1,8 @@
 document.addEventListener('turbolinks:load', function () {
   if (!$('#card_form')[0]) return false; //カード登録ページではないなら以降実行しない。
 
-  Payjp.setPublicKey("pk_test_ef5652e61cdfb0f17f57dc03"); //公開鍵を読み込む。
+  console.log(process.env.PAYJP_PUBLIC_KEY);
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY); //公開鍵を読み込む。
   const regist_button = $("#regist_card"); //カード入力フォームの登録ボタン。
 
   regist_button.on("click", function (e) { //登録ボタンを押したとき（ここはsubmitではなくclickにしておく）。
@@ -29,7 +30,7 @@ document.addEventListener('turbolinks:load', function () {
         // ↓formのsubmitボタンを強制起動する（ページが遷移してコントローラが起動する）。
         $('#card_form')[0].submit();
       } else { //失敗した場合
-        alert("カード情報が正しくありません。");
+        alert(`カード情報が正しくありません ${response.error.message}`); // トークン生成に失敗した時のエラーメッセージ
         regist_button.prop('disabled', false);
       }
 

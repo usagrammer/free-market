@@ -8,54 +8,54 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     %script{src: "https://js.pay.jp/", type: "text/javascript"}
-%body
-  = render 'shared/flash'
-  .horizontal-padding-25
-    %header.header-no-menu
-      = link_to root_path do
-        = image_tag 'top-logo.svg', class: "logo"
-      -if @progress
-        .progress-bar
-          .progress
-            .progress-title{class: "#{'doing' if @progress == 1}"}
-              会員情報
-            .progress-node
-              .progress-node__circle{class: "#{'done' if @progress >= 1}"}
-              .progress-node__line{class: "#{'done' if @progress >= 2}"}
-          .progress
-            .progress-title{class: "#{'doing' if @progress == 2}"}
-              電話番号認証
-            .progress-node
-              .progress-node__circle{class: "#{'done' if @progress >= 2}"}
-              .progress-node__line{class: "#{'done' if @progress >= 3}"}
-          .progress
-            .progress-title{class: "#{'doing' if @progress == 3}"}
-              お届け先住所入力
-            .progress-node
-              .progress-node__circle{class: "#{'done' if @progress >= 3}"}
-              .progress-node__line{class: "#{'done' if @progress >= 4}"}
-          .progress
-            .progress-title{class: "#{'doing' if @progress == 4}"}
-              支払い方法
-            .progress-node
-              .progress-node__circle{class: "#{'done' if @progress >= 4}"}
-              .progress-node__line{class: "#{'done' if @progress >= 5}"}
-          .progress
-            .progress-title{class: "#{'doing' if @progress == 5}"}
-              完了
-            .progress-node
-              .progress-node__circle{class: "#{'done' if @progress >= 5}"}
-    = yield
-    %footer.footer-no-menu
-      %nav
-        %ul
-          = link_to "" do
-            %li
-              プライバシーポリシー
-          = link_to "" do
-            %li
-              メルカリ利用規約
-          = link_to "" do
-            %li
-              特定商取引に関する表記
-      = image_tag 'bottom-logo.svg', class: "logo"
+  %body
+    = render 'shared/flash'
+    .horizontal-padding-25
+      %header.header-no-menu
+        = link_to root_path do
+          = image_tag 'top-logo.svg', class: "logo"
+        -if @progress
+          .progress-bar
+            .progress
+              .progress-title{class: "#{'doing' if @progress == 1}"}
+                会員情報
+              .progress-node
+                .progress-node__circle{class: "#{'done' if @progress >= 1}"}
+                .progress-node__line{class: "#{'done' if @progress >= 2}"}
+            .progress
+              .progress-title{class: "#{'doing' if @progress == 2}"}
+                電話番号認証
+              .progress-node
+                .progress-node__circle{class: "#{'done' if @progress >= 2}"}
+                .progress-node__line{class: "#{'done' if @progress >= 3}"}
+            .progress
+              .progress-title{class: "#{'doing' if @progress == 3}"}
+                お届け先住所入力
+              .progress-node
+                .progress-node__circle{class: "#{'done' if @progress >= 3}"}
+                .progress-node__line{class: "#{'done' if @progress >= 4}"}
+            .progress
+              .progress-title{class: "#{'doing' if @progress == 4}"}
+                支払い方法
+              .progress-node
+                .progress-node__circle{class: "#{'done' if @progress >= 4}"}
+                .progress-node__line{class: "#{'done' if @progress >= 5}"}
+            .progress
+              .progress-title{class: "#{'doing' if @progress == 5}"}
+                完了
+              .progress-node
+                .progress-node__circle{class: "#{'done' if @progress >= 5}"}
+      = yield
+      %footer.footer-no-menu
+        %nav
+          %ul
+            = link_to "" do
+              %li
+                プライバシーポリシー
+            = link_to "" do
+              %li
+                メルカリ利用規約
+            = link_to "" do
+              %li
+                特定商取引に関する表記
+        = image_tag 'bottom-logo.svg', class: "logo"

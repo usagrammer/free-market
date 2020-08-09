@@ -23,9 +23,9 @@ class CardsController < ApplicationController
   end
 
   def destroy
-    card = current_user.card
+    @card = current_user.card
 
-    if card.destroy
+    if @card.destroy
       redirect_to cards_path, notice: "カードの削除が完了しました。"
     else
       redirect_to cards_path, notice: "カードの削除に失敗しました。"

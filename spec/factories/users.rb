@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user, aliases: [:seller, :buyer] do  ## aliasesでsellerとbuyerとして使えるようになる
+  factory :user, aliases: [:seller, :buyer] do  ## aliasesで:sellerと:buyerとして使えるようになる
     email {Faker::Internet.email}
     password { "hogehogefugafuga123" }
     nickname { Faker::Name.name}
