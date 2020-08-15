@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_one :card
   has_one :sns_credential, dependent: :destroy
 
+  has_many :likes
+  has_many :like_items, through: :likes, source: "item"
+
   def self.from_omniauth(auth_data)
     email = auth_data.info.email
     nickname = auth_data.info.name

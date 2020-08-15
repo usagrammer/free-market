@@ -70,3 +70,15 @@
           商品を編集する
     .item-show__detail
       = @item.detail
+    #item-like{ data: { item_id: @item.id }}
+      -# ーーー変更ここからーーー
+      - if @item.likes.find_by(user_id: current_user&.id)
+        %span#item-like-heart.liked
+          = icon "fas", "heart"
+      - else
+        %span#item-like-heart
+          = icon "fas", "heart"
+      -# ーーー変更ここまでーーー
+      イイね!
+      %span#likes-count
+        = @item.likes.length

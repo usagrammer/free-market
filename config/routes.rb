@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :api do
+    get 'likes/switch'
+  end
+  namespace :api do
+    get 'likes/update'
+  end
   root to: "items#index"
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -31,5 +37,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :categories, only: :index, defaults: { format: 'json' }
   end
+
+  ## 追加
+  post "/likes", to: "api/likes#switch"
 
 end
