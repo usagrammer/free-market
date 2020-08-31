@@ -45,7 +45,6 @@ RSpec.configure do |config|
   ## deviseの導入に必要
   config.include ControllerMacros, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include ControllerMacros, type: :controller
 
   config.include FactoryBot::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
